@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/D:/Sipac/AplicacionesPlantilla/Java/AplicacionWeb/web/WEB-INF/jsp/contenido.jsp</file>
+            <file>file:/D:/Sipac/AplicacionesPlantilla/Java/AplicacionWeb/web/WEB-INF/jsp/aplicacion.jsp</file>
+        </group>
+        <group name="AplicacionWeb">
+            <file>file:/D:/Sipac/AplicacionesPlantilla/Java/AplicacionWeb/src/java/com/jbp/aplicacionweb/dao/RepositorioGes.java</file>
+            <file>file:/D:/Sipac/AplicacionesPlantilla/Java/AplicacionWeb/src/java/com/jbp/aplicacionweb/dao/EntidadGes.java</file>
+            <file>file:/D:/Sipac/AplicacionesPlantilla/Java/AplicacionWeb/src/java/com/jbp/aplicacionweb/dao/ClavePrimaria.java</file>
+            <file>file:/D:/Sipac/AplicacionesPlantilla/Java/AplicacionWeb/src/java/com/jbp/aplicacionweb/xml/Bp.xml.ges</file>
+            <file>file:/D:/Sipac/AplicacionesPlantilla/Java/AplicacionWeb/src/java/com/jbp/aplicacionweb/dto/DtoGenerico.java</file>
+            <file>file:/D:/Sipac/AplicacionesPlantilla/Java/AplicacionWeb/web/WEB-INF/jsp/crud/editor.jsp</file>
+            <file>file:/D:/Sipac/AplicacionesPlantilla/Java/AplicacionWeb/web/WEB-INF/jsp/crud/formulario.jsp</file>
+            <file>file:/D:/Sipac/AplicacionesPlantilla/Java/AplicacionWeb/src/java/com/jbp/aplicacionweb/dto/MapaDto.java</file>
+            <file>file:/D:/Sipac/AplicacionesPlantilla/Java/AplicacionWeb/src/java/com/jbp/aplicacionweb/controlador/ControladorCrud.java</file>
+            <file>file:/D:/Sipac/AplicacionesPlantilla/Java/AplicacionWeb/src/java/com/jbp/aplicacionweb/dto/ServicioPaginacionGenerico.java</file>
+            <file>file:/D:/Sipac/AplicacionesPlantilla/Java/AplicacionWeb/web/resources/js/crud.js</file>
+            <file>file:/D:/Sipac/AplicacionesPlantilla/Java/AplicacionWeb/src/java/utiles/sql/esquema/TipoDato.java</file>
+            <file>file:/D:/Sipac/AplicacionesPlantilla/Java/AplicacionWeb/src/java/com/jbp/aplicacionweb/dao/MapaValores.java</file>
+            <file>file:/D:/Sipac/AplicacionesPlantilla/Java/AplicacionWeb/src/java/com/jbp/aplicacionweb/dto/ValorDto.java</file>
+            <file>file:/D:/Sipac/AplicacionesPlantilla/Java/AplicacionWeb/src/java/com/jbp/aplicacionweb/dao/ConstructorEntidadGes.java</file>
+        </group>
+    </open-files>
+</project-private>
