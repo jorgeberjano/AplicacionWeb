@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group name="INTEF">
+            <file>file:/C:/proyectos/EBAMBI/utiles/src/utiles/sql/ConstructorEntidad.java</file>
+            <file>file:/C:/proyectos/EBAMBI/utiles/src/utiles/sql/EjecutorSentencia.java</file>
+            <file>file:/C:/proyectos/EBAMBI/utiles/src/utiles/sql/GestorConexiones.java</file>
+            <file>file:/C:/proyectos/EBAMBI/utiles/src/utiles/sql/PlantillaSql.java</file>
+        </group>
+        <group/>
+        <group name="IntegraID"/>
+        <group name="IntegraID_63">
+            <file>file:/C:/proyectos/EBAMBI/utiles/src/utiles/tiempo/FechaAbstracta.java</file>
+            <file>file:/C:/proyectos/EBAMBI/utiles/src/utiles/sql/esquema/TablaBd.java</file>
+            <file>file:/C:/proyectos/EBAMBI/utiles/src/utiles/swing/tabla/ModeloTablaGenerico.java</file>
+            <file>file:/C:/proyectos/EBAMBI/utiles/src/utiles/sql/esquema/EsquemaBd.java</file>
+            <file>file:/C:/proyectos/EBAMBI/utiles/src/utiles/sql/sincronizacion/SincronizadorBd.java</file>
+            <file>file:/C:/proyectos/EBAMBI/utiles/src/utiles/sql/MetadatosBd.java</file>
+            <file>file:/C:/proyectos/EBAMBI/utiles/src/utiles/sql/compatibilidad/FormateadorOracle.java</file>
+            <file>file:/C:/proyectos/EBAMBI/utiles/src/utiles/sql/PlantillaSql.java</file>
+            <file>file:/C:/proyectos/EBAMBI/utiles/src/utiles/xml/CreadorXml.java</file>
+            <file>file:/C:/proyectos/EBAMBI/utiles/src/utiles/sql/sincronizacion/EntidadGenerica.java</file>
+        </group>
+        <group name="Ebambi"/>
+        <group name="IntegraID_trunk"/>
+        <group name="EBAMBI">
+            <file>file:/C:/proyectos/EBAMBI/utiles/src/utiles/swing/tabla/TablaGenerica.java</file>
+        </group>
+        <group name="IID-WEB">
+            <file>file:/C:/proyectos/EBAMBI/utiles/src/utiles/tiempo/FechaAbstracta.java</file>
+            <file>file:/C:/proyectos/EBAMBI/utiles/src/utiles/tiempo/FechaHora.java</file>
+            <file>file:/C:/proyectos/EBAMBI/utiles/src/utiles/sql/EjecutorSentenciaGuardado.java</file>
+            <file>file:/C:/proyectos/EBAMBI/utiles/src/utiles/sql/EjecutorSentenciaUpdate.java</file>
+            <file>file:/C:/proyectos/EBAMBI/utiles/src/utiles/conversion/Conversion.java</file>
+            <file>file:/C:/proyectos/EBAMBI/utiles/src/utiles/tiempo/Fecha.java</file>
+        </group>
+        <group name="AplicacionWeb"/>
+    </open-files>
+</project-private>
