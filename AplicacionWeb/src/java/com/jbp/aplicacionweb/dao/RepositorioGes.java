@@ -36,11 +36,15 @@ public class RepositorioGes extends Dao implements Dao.Listener {
         boolean esInserccion = entidad.esNueva();
         EjecutorSentenciaGuardado ejecutor = esInserccion ? ejecutorInsert : ejecutorUpdate;
 
-        ejecutor.setTabla(consulta.getTabla());
+        String tabla = consulta.getTabla();
+        ejecutor.setTabla(tabla);
         List<CampoGes> campos = consulta.getListaCampos();
                
         ClavePrimaria nuevaClavePrimaria = new ClavePrimaria();
         for (CampoGes campo : campos) {
+            if (tabla.compareToIgnoreCase(campo.getTabla()) != 0) {
+                continue;
+            }
             String nombreCampo = campo.getNombre();
             String nombreSqlCampo = campo.getNombreSql();
             Object valor = entidad.get(nombreCampo);
@@ -63,10 +67,6 @@ public class RepositorioGes extends Dao implements Dao.Listener {
         if (ok) {
             entidad.setClavePrimaria(nuevaClavePrimaria);
         }
-
-//        if (esInserccion && ok) {
-//            entidad.setId(secuencia.getValorGenerado());
-//        }
         return ok;
     }
 

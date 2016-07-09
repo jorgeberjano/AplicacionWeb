@@ -20,8 +20,7 @@
         <div class="form-group">            
             <form:label path="mapa['${campo.getNombre()}'].valor" for="${campo.getNombre()}"><c:out value='${campo.getTitulo()}' /></form:label>
             <c:choose>
-                <c:when test="${campo.tipoDato == 'BOOLEANO'}">
-                    BOOL
+                <c:when test="${not empty campo.opciones}">
                     <form:select path="mapa['${campo.getNombre()}'].valor"
                                  items="${campo.opciones}"
                                  multiple="false"                                 
@@ -30,7 +29,6 @@
                                  id="${campo.getNombre()}" />
                 </c:when>
                 <c:when test="${campo.tipoDato == 'FECHA'}">
-                    FECHA
                     <form:input path="mapa['${campo.getNombre()}'].valor"
                                 tabindex="${campo.getIndice()}"
                                 class="form-control"

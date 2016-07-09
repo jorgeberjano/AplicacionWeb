@@ -7,7 +7,15 @@
             <file>file:/D:/Sipac/AplicacionesPlantilla/Java/AplicacionWeb/web/WEB-INF/jsp/aplicacion.jsp</file>
         </group>
         <group name="AplicacionWeb">
+            <file>file:/D:/Sipac/AplicacionesPlantilla/Java/AplicacionWeb/src/java/com/jbp/aplicacionweb/dao/RepositorioGes.java</file>
+            <file>file:/D:/Sipac/AplicacionesPlantilla/Java/AplicacionWeb/web/WEB-INF/jsp/crud/editor_botones.jsp</file>
+            <file>file:/D:/Sipac/AplicacionesPlantilla/Java/AplicacionWeb/web/WEB-INF/jsp/crud/tabla.jsp</file>
+            <file>file:/D:/Sipac/AplicacionesPlantilla/Java/AplicacionWeb/web/WEB-INF/jsp/crud/editor_formulario.jsp</file>
             <file>file:/D:/Sipac/AplicacionesPlantilla/Java/AplicacionWeb/src/java/com/jbp/aplicacionweb/xml/Bp.xml.ges</file>
+            <file>file:/D:/Sipac/AplicacionesPlantilla/Java/AplicacionWeb/src/java/com/jbp/aplicacionweb/dto/DtoGenerico.java</file>
+            <file>file:/D:/Sipac/AplicacionesPlantilla/Java/AplicacionWeb/web/WEB-INF/jsp/crud/editor.jsp</file>
+            <file>file:/D:/Sipac/AplicacionesPlantilla/Java/AplicacionWeb/src/java/com/jbp/aplicacionweb/dto/ValorDto.java</file>
+            <file>file:/D:/Sipac/AplicacionesPlantilla/Java/AplicacionWeb/src/java/com/jbp/aplicacionweb/controlador/ControladorCrud.java</file>
         </group>
     </open-files>
 </project-private>

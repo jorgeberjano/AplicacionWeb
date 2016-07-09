@@ -3,7 +3,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
-<div id="div_tabla" class="row show-grid">   
+<div id="div_tabla" class="row show-grid ">   
     <div class="container show-top-margin separate-rows">
         <div class="row show-grid">
             <div class="col-md-8">
@@ -16,31 +16,35 @@
             </div>
         </div>
     </div>
-    
+
     <div class="row spacer"/>
-    
-    <table id="tabla" class="table table-striped table-bordered table-hover">
-        <thead>
-            <tr>
-                <c:forEach var="campo" items="${consulta.listaCampos}">                
-                    <%-- <th class="text-center" data-field="<c:out value="${campo.nombre}" />" data-align="center" ><c:out value="${campo.titulo}" /></th>
-                    --%>
-                    <th class="text-center " data-field="${campo.nombre}" data-align="center" ><c:out value="${campo.titulo}" /></th>
-                </c:forEach>
-            </tr>
-        </thead>
-        <tbody>
-            <c:forEach var="elemento" items="${listaElementos}">
-                <tr id="row">             
-                    <c:forEach var="campo" items="${consulta.listaCampos}">
-                        <td title="${campo.nombre}" class="${campo.clave ? "pk" : ""}">
-                            <c:out value="${elemento.get(campo.nombre)}" />
-                        </td>
+    <div class="table-responsive">
+        <table id="tabla" class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <c:forEach var="campo" items="${consulta.listaCampos}">                
+                        <%-- <th class="text-center" data-field="<c:out value="${campo.nombre}" />" data-align="center" ><c:out value="${campo.titulo}" /></th>
+                        --%>
+                        <th class="text-center"
+                            data-field="${campo.nombre}" ><c:out value="${campo.titulo}" />
+                        </th>                    
                     </c:forEach>
                 </tr>
-            </c:forEach>
-        </tbody>
-    </table>                  
+            </thead>
+            <tbody>
+                <c:forEach var="elemento" items="${listaElementos}">
+                    <tr id="row">             
+                        <c:forEach var="campo" items="${consulta.listaCampos}">
+                            <td title="${campo.nombre}"
+                                class="${campo.clave ? "pk" : ""} text-${campo.align}">
+                                <c:out value="${elemento.get(campo.nombre)}" />
+                            </td>
+                        </c:forEach>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>      
+    </div>
     <c:choose>
         <c:when test="${not empty mensaje_error}">
             <div class="row show-grid">
@@ -58,12 +62,12 @@
         </c:when>
     </c:choose>
 
-    
 
-    <script>        
+
+    <script>
         $("tr#row").click(function () {
             var pk = serializarCampos($(this).find("td.pk"));
-            
+
             var campoSeleccion = $("#campoSeleccion").html();
             if (campoSeleccion) {
                 seleccionado(campoSeleccion, pk);
@@ -72,11 +76,11 @@
             }
         });
 
-        $("#boton_crear").click(function() {
+        $("#boton_crear").click(function () {
             crearElemento();
         });
 
-        $("th").click(function() {
+        $("th").click(function () {
             var campoOrden = this.getAttribute("data-field");
             var campoSeleccion = $("#campoSeleccion").html();
             ordenar(campoOrden, campoSeleccion);

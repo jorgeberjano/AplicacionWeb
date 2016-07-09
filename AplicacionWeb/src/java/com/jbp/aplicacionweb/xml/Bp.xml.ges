@@ -1606,26 +1606,6 @@ FROM (((((((((Autorizaciones
             <valorPorDefecto></valorPorDefecto>
         </campo>
         <campo>
-            <nombre>conNombre</nombre>
-            <tabla>Conductores</tabla>
-            <campo>conNombre</campo>
-            <titulo>Nombre conductor</titulo>
-            <tipoDato>CADENA</tipoDato>
-            <tipoRol>NOMBRE</tipoRol>
-            <alineacion>0</alineacion>
-            <longitud>30</longitud>
-            <formato>%s</formato>
-            <unidad></unidad>
-            <decimales>0</decimales>
-            <estilo>0x0</estilo>
-            <expresionGT></expresionGT>
-            <formatoGT></formatoGT>
-            <consultaSeleccion></consultaSeleccion>
-            <valorNulo></valorNulo>
-            <nombreCampoRelacion></nombreCampoRelacion>
-            <valorPorDefecto></valorPorDefecto>
-        </campo>
-        <campo>
             <nombre>autCodigoTransportista</nombre>
             <tabla>Autorizaciones</tabla>
             <campo>autCodigoTransportista</campo>
@@ -1826,46 +1806,6 @@ FROM (((((((((Autorizaciones
             <valorPorDefecto></valorPorDefecto>
         </campo>
         <campo>
-            <nombre>ageNombre</nombre>
-            <tabla>Agencias</tabla>
-            <campo>ageNombre</campo>
-            <titulo>Nombre agencia</titulo>
-            <tipoDato>CADENA</tipoDato>
-            <tipoRol>NOMBRE</tipoRol>
-            <alineacion>0</alineacion>
-            <longitud>50</longitud>
-            <formato>%s</formato>
-            <unidad></unidad>
-            <decimales>0</decimales>
-            <estilo>0x0</estilo>
-            <expresionGT></expresionGT>
-            <formatoGT></formatoGT>
-            <consultaSeleccion></consultaSeleccion>
-            <valorNulo></valorNulo>
-            <nombreCampoRelacion></nombreCampoRelacion>
-            <valorPorDefecto></valorPorDefecto>
-        </campo>
-        <campo>
-            <nombre>autCodigoOrigen</nombre>
-            <tabla>Autorizaciones</tabla>
-            <campo>autCodigoOrigen</campo>
-            <titulo>Código origen</titulo>
-            <tipoDato>CADENA</tipoDato>
-            <tipoRol>FTOTAL</tipoRol>
-            <alineacion>0</alineacion>
-            <longitud>13</longitud>
-            <formato>%s</formato>
-            <unidad></unidad>
-            <decimales>0</decimales>
-            <estilo>0x0</estilo>
-            <expresionGT></expresionGT>
-            <formatoGT></formatoGT>
-            <consultaSeleccion></consultaSeleccion>
-            <valorNulo></valorNulo>
-            <nombreCampoRelacion></nombreCampoRelacion>
-            <valorPorDefecto></valorPorDefecto>
-        </campo>
-        <campo>
             <nombre>oriNombre</nombre>
             <tabla>Lugares</tabla>
             <campo>lugNombre</campo>
@@ -1882,7 +1822,7 @@ FROM (((((((((Autorizaciones
             <formatoGT></formatoGT>
             <consultaSeleccion></consultaSeleccion>
             <valorNulo></valorNulo>
-            <nombreCampoRelacion></nombreCampoRelacion>
+            <nombreCampoRelacion>autCodigoOrigen</nombreCampoRelacion>
             <valorPorDefecto></valorPorDefecto>
         </campo>
         <campo>
@@ -2075,6 +2015,66 @@ FROM (((((((((Autorizaciones
             <alineacion>1</alineacion>
             <longitud>20</longitud>
             <formato>%d</formato>
+            <unidad></unidad>
+            <decimales>0</decimales>
+            <estilo>0x0</estilo>
+            <expresionGT></expresionGT>
+            <formatoGT></formatoGT>
+            <consultaSeleccion></consultaSeleccion>
+            <valorNulo></valorNulo>
+            <nombreCampoRelacion></nombreCampoRelacion>
+            <valorPorDefecto></valorPorDefecto>
+        </campo>
+        <campo>
+            <nombre>ageNombre</nombre>
+            <tabla>Agencias</tabla>
+            <campo>ageNombre</campo>
+            <titulo>Nombre agencia</titulo>
+            <tipoDato>CADENA</tipoDato>
+            <tipoRol>NOMBRE</tipoRol>
+            <alineacion>0</alineacion>
+            <longitud>50</longitud>
+            <formato>%s</formato>
+            <unidad></unidad>
+            <decimales>0</decimales>
+            <estilo>0x0</estilo>
+            <expresionGT></expresionGT>
+            <formatoGT></formatoGT>
+            <consultaSeleccion></consultaSeleccion>
+            <valorNulo></valorNulo>
+            <nombreCampoRelacion>autCodigoAgencia</nombreCampoRelacion>
+            <valorPorDefecto></valorPorDefecto>
+        </campo>
+        <campo>
+            <nombre>autCodigoOrigen</nombre>
+            <tabla>Autorizaciones</tabla>
+            <campo>autCodigoOrigen</campo>
+            <titulo>Código origen</titulo>
+            <tipoDato>CADENA</tipoDato>
+            <tipoRol>FTOTAL</tipoRol>
+            <alineacion>0</alineacion>
+            <longitud>13</longitud>
+            <formato>%s</formato>
+            <unidad></unidad>
+            <decimales>0</decimales>
+            <estilo>0x0</estilo>
+            <expresionGT></expresionGT>
+            <formatoGT></formatoGT>
+            <consultaSeleccion>Orígenes</consultaSeleccion>
+            <valorNulo></valorNulo>
+            <nombreCampoRelacion></nombreCampoRelacion>
+            <valorPorDefecto></valorPorDefecto>
+        </campo>
+        <campo>
+            <nombre>conNombre</nombre>
+            <tabla>Conductores</tabla>
+            <campo>conNombre</campo>
+            <titulo>Nombre conductor</titulo>
+            <tipoDato>CADENA</tipoDato>
+            <tipoRol>NOMBRE</tipoRol>
+            <alineacion>0</alineacion>
+            <longitud>30</longitud>
+            <formato>%s</formato>
             <unidad></unidad>
             <decimales>0</decimales>
             <estilo>0x0</estilo>

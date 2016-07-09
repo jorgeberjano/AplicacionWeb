@@ -134,6 +134,15 @@ public class CampoGes implements Campo, Serializable {
     public void setAlineacion(int alineacion) {
         this.alineacion = alineacion;
     }
+    
+    public String getAlign() {
+        switch (alineacion) {
+            case 0: return "left";
+            case 1: return "right";
+            case 2: return "center";
+            default: return "";
+        }
+    }
 
     public int getLongitud() {
         return longitud;
@@ -262,8 +271,8 @@ public class CampoGes implements Campo, Serializable {
             case ENTERO:
                 if (tieneOpciones()) {
                     String textoOpcion = Conversion.aCadena(valor);
-                    int indiceOpcion = parsearOpcion(textoOpcion);
-                    return new Long(indiceOpcion);
+                    Long valorOpcion = parsearOpcion(textoOpcion);
+                    return valorOpcion;
                 }
                 return Conversion.aEntero(valor);
             case REAL:
@@ -271,11 +280,14 @@ public class CampoGes implements Campo, Serializable {
             case BOOLEANO:
                 if (tieneOpciones()) {
                     String textoOpcion = Conversion.aCadena(valor);
-                    int indiceOpcion = parsearOpcion(textoOpcion);
-                    switch (indiceOpcion) {
-                        case 1:
+                    Long valorOpcion = parsearOpcion(textoOpcion);
+                    if (valorOpcion == null) {
+                        return null;
+                    }
+                    switch (valorOpcion.intValue()) {
+                        case 0:
                             return Boolean.FALSE;
-                        case 2:
+                        case 1:
                             return Boolean.TRUE;
                         default:
                             return null;
@@ -303,61 +315,75 @@ public class CampoGes implements Campo, Serializable {
         }
         opciones = new ArrayList<>();
         
-        if (formato.startsWith("#")) {
+        boolean esEnumerado = formato.startsWith("#");
+        if ((esEnumerado || tipoDato == TipoDato.BOOLEANO) &&
+                puedeSerNulo()) {
+            opciones.add(valorNulo);
+        }
+            
+        if (esEnumerado) {
             String cadenaOpciones;
-            if (tieneEstilo(CAMPO_NO_NULO)) {
-                cadenaOpciones = formato.substring(1);
-            } else {
-                cadenaOpciones = formato;
-            }
+            cadenaOpciones = formato.substring(1);
             String[] arrayOpciones = cadenaOpciones.split("#");
-            opciones = Arrays.asList(arrayOpciones);
+            opciones.addAll(Arrays.asList(arrayOpciones));
         } else if (tipoDato == TipoDato.BOOLEANO) {
             String[] split = formato.split("/");
-            if (!tieneEstilo(CAMPO_NO_NULO)) {
-                opciones.add("");                
-            }
-            if (split.length > 0) {
-                opciones.add(split[0]);                
-            }
             if (split.length > 1) {
               opciones.add(split[1]);                
             }
-
-        }
-        
+            if (split.length > 0) {
+                opciones.add(split[0]);                
+            }            
+        }       
         return opciones;
     }
 
     public boolean tieneOpciones() {
         return getOpciones().size() > 0;
     }
-
-    public int parsearOpcion(String texto) {
-        if (!tieneOpciones()) {
-            return 0;
-        }
-        for (int i = 0; i < opciones.size(); i++) {
-            if (opciones.get(i).equals(texto)) {
-                return i;
-            }
-        }
-        return 0;
+    
+    public boolean puedeSerNulo() {
+        return !tieneEstilo(CAMPO_NO_NULO);
     }
 
-    public String formatearOpcion(Integer indice) {
+    public Long parsearOpcion(String texto) {
+        if (!tieneOpciones()) {
+            return 0L;
+        }
+        if (puedeSerNulo() && texto.equals(valorNulo)) {
+            return null;
+        }
+        
+        for (int i = 0; i < opciones.size(); i++) {
+            if (opciones.get(i).equals(texto)) {
+                if (puedeSerNulo()) {
+                    return new Long(i == 0 ? null : i - 1);
+                } else {
+                    return new Long(i);
+                }
+            }
+        }
+        return 0L;
+    }
+
+    public String formatearOpcion(Long valor) {
 
         if (!tieneOpciones()) {
             return "";
         }
-        if (indice == null) {
-            return opciones.get(0);
+        
+        if (puedeSerNulo()) {
+            return valor == null ? getOpcion(0) : getOpcion(valor.intValue() + 1);
+        } else {
+            return valor == null ? "" : getOpcion(valor.intValue());
         }
-
-        if (indice < 0 || indice >= opciones.size()) {
+    }
+    
+    public String getOpcion(int i) {
+        if (i < 0 || i >= opciones.size()) {
             return "";
         }
-        return opciones.get(indice);
+        return opciones.get(i);
     }
 
     public String formatearValorParaVisualizacion(Object valor) {
@@ -372,7 +398,7 @@ public class CampoGes implements Campo, Serializable {
                 return Conversion.aCadena(valor);
             case ENTERO:
                 if (tieneOpciones()) {
-                    return formatearOpcion(Conversion.aEntero(valor).intValue());
+                    return formatearOpcion(Conversion.aEntero(valor));
                 }
                 return Conversion.aCadena(valor);
             case REAL:
@@ -380,7 +406,7 @@ public class CampoGes implements Campo, Serializable {
             case BOOLEANO:
                 Boolean b = Conversion.aBooleano(valor);
                 if (tieneOpciones()) {
-                    return formatearOpcion(b == null ? 0 : (b ? 1 : 2));
+                    return formatearOpcion(b == null ? null : (b ? 1L : 0L));
                 }
                 return Conversion.aCadena(b);
             case FECHA:
