@@ -11,11 +11,7 @@
             <file>file:/D:/Sipac/AplicacionesPlantilla/Java/ges/src/uitl/xml/AsistenteXml.java</file>
         </group>
         <group name="AplicacionWeb">
-            <file>file:/D:/Sipac/AplicacionesPlantilla/Java/ges/src/com/jbp/ges/entidad/CampoGes.java</file>
-            <file>file:/D:/Sipac/AplicacionesPlantilla/Java/ges/test/com/jbp/ges/utilidades/TestGestorSimbolos.java</file>
-            <file>file:/D:/Sipac/AplicacionesPlantilla/Java/ges/src/com/jbp/ges/utilidades/GestorSimbolos.java</file>
-            <file>file:/D:/Sipac/AplicacionesPlantilla/Java/ges/src/xml/Bp.xml.ges</file>
-            <file>file:/D:/Sipac/AplicacionesPlantilla/Java/ges/src/uitl/xml/AsistenteXml.java</file>
+            <file>file:/D:/datos/desarrollo/web/AplicacionWeb/ges/src/com/jbp/ges/entidad/CampoGes.java</file>
         </group>
     </open-files>
 </project-private>

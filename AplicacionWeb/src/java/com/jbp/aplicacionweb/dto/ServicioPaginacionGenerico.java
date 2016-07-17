@@ -30,6 +30,9 @@ public class ServicioPaginacionGenerico implements IServicioPaginacion {
     public DtoGenerico getDto(String pk) {
         ClavePrimaria clavePrimaria = parsearClavePrimaria(pk);
         EntidadGes entidad = repositorio.getEntidad(clavePrimaria);
+        if (entidad == null) {
+            return null;
+        }
         return new DtoGenerico(entidad, consulta);
     }
     

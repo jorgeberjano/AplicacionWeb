@@ -31,8 +31,17 @@
                 <c:when test="${campo.tipoDato == 'FECHA'}">
                     <form:input path="mapa['${campo.getNombre()}'].valor"
                                 tabindex="${campo.getIndice()}"
-                                class="form-control"
+                                class="fecha-hora form-control"
                                 id="${campo.getNombre()}" />
+                    <script>
+
+                        var componenteFecha = $('.fecha-hora').datepicker({
+                            format: 'dd/mm/yyyy',
+                            autoclose: true
+                        }).on('changeDate', function (ev) {
+                            componenteFecha.hide();
+                        }).data('datepicker');
+                    </script>
                 </c:when>
                 <c:otherwise>
                     <form:input path="mapa['${campo.getNombre()}'].valor" tabindex="${campo.getIndice()}" class="form-control" id="${campo.getNombre()}" />

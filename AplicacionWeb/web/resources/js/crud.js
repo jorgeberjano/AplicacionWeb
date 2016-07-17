@@ -100,7 +100,7 @@ function mostrarElemento(pk) {
     var idConsulta = $("#idConsulta").html();
     $.ajax({
         type: "GET",
-        url: completarUrl("mostrar/" + idConsulta + "/" + pk),
+        url: completarUrl("mostrar/" + idConsulta + "/" + pk + "/"),
         success: function (result) {
             $("#contenedor_crud").html(result);
             $("#pk").html(pk);
@@ -126,7 +126,7 @@ function modificarElemento() {
     var pk = $("#pk").html();
     $.ajax({
         type: "GET",
-        url: completarUrl("modificar/" + idConsulta + "/" + pk),
+        url: completarUrl("modificar/" + idConsulta + "/" + pk + "/"),
         success: function (result) {
             $("#contenedor_crud").html(result);
         },
@@ -139,7 +139,7 @@ function borrarElemento() {
     var pk = $("#pk").html();
     $.ajax({
         type: "GET",
-        url: completarUrl("borrar/" + idConsulta + "/" + pk),
+        url: completarUrl("borrar/" + idConsulta + "/" + pk + "/"),
         success: function (result) {
             $("#contenedor_crud").html(result);
         },
@@ -153,7 +153,7 @@ function guardarElemento(form) {
     var datos = new FormData(form);    
     $.ajax({
         type: "POST",
-        url: completarUrl("guardar/" + idConsulta + "/" + pk),
+        url: completarUrl("guardar/" + idConsulta + "/" + pk + "/"),
         contentType: false,
         processData: false,
         data: datos,

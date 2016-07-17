@@ -238,7 +238,7 @@ public class CampoGes implements Campo, Serializable {
 
     @Override
     public String getNombreSql() {
-        return campo;
+        return nombre;
     }
 
     public String getTipoDatoJava() {

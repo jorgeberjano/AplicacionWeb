@@ -152,7 +152,7 @@ public class ControladorCrud {
             @PathVariable String idConsulta,
             ModelMap modelMap) {
 
-        return new ModelAndView("redirect:tabla/" + idConsulta, modelMap);
+        return new ModelAndView("redirect:tabla/" + idConsulta + "/", modelMap);
     }
     
     /**
@@ -188,15 +188,20 @@ public class ControladorCrud {
 
         ConsultaGes consulta = Global.getInstancia().getConsultaPorId(idConsulta);
         ServicioPaginacionGenerico servicio = new ServicioPaginacionGenerico(consulta);
-//        Object beanEdicion = servicio.getBeanEdicion(pk);
         DtoGenerico dto = servicio.getDto(pk);
+        
+        if (dto == null) {
+            model.addAttribute("mensaje_error", "No se ha encontrado el elemento " + pk);
+            model.addAttribute("url_retorno", "tabla/" + idConsulta + "/");
+            return new ModelAndView("crud/error", model);
+        }
 
         model.addAttribute("consulta", consulta);
         model.addAttribute("titulo", "Mostrar " + consulta.getNombreEnSingular());
         model.addAttribute("pk", pk);
         model.addAttribute("elemento", dto);
         model.addAttribute("modo", "mostrar");
-        model.addAttribute("mensaje_error", "");
+        
 
         return new ModelAndView("crud/editor", model);
     }
@@ -263,7 +268,7 @@ public class ControladorCrud {
             model.addAttribute("url_retorno", "tabla/" + idConsulta);
             return new ModelAndView("crud/error", model);
         }
-        return new ModelAndView("redirect:/mostrar/" + idConsulta + "/" + nuevaPk, model);
+        return new ModelAndView("redirect:/mostrar/" + idConsulta + "/" + nuevaPk + "/", model);
     }
 
     @RequestMapping(value = "/guardar/{idConsulta}/{pk}",
@@ -292,13 +297,13 @@ public class ControladorCrud {
         if (nuevaPk == null || pk.isEmpty()) {
             model.addAttribute("mensaje_error", servicio.getMensajeError());
             if (Conversion.isBlank(nuevaPk)) {
-                model.addAttribute("url_retorno", "tabla/" + idConsulta);
+                model.addAttribute("url_retorno", "tabla/" + idConsulta + "/");
             } else {
-                model.addAttribute("url_retorno", "mostrar/" + idConsulta + "/" + nuevaPk);                
+                model.addAttribute("url_retorno", "mostrar/" + idConsulta + "/" + nuevaPk + "/");                
             }
             return new ModelAndView("crud/error", model);            
         }
-        return new ModelAndView("redirect:/mostrar/" + idConsulta + "/" + nuevaPk, model);
+        return new ModelAndView("redirect:/mostrar/" + idConsulta + "/" + nuevaPk + "/", model);
     }
 
     @RequestMapping(value = "/borrar/{idConsulta}/{pk}", method = RequestMethod.GET)
@@ -312,11 +317,11 @@ public class ControladorCrud {
         
         boolean ok = servicio.borrarDto(pk);
         if (!ok) {
-            request.getSession().setAttribute("mensaje", servicio.getMensajeError()); 
-            model.addAttribute("url_retorno", "mostrar/" + idConsulta + "/" + pk);
-            return new ModelAndView("error", model);
+            model.addAttribute("mensaje_error", servicio.getMensajeError()); 
+            model.addAttribute("url_retorno", "mostrar/" + idConsulta + "/" + pk + "/");
+            return new ModelAndView("crud/error", model);
         }
-        return new ModelAndView("redirect:/tabla/" + consulta.getNombre(), model);
+        return new ModelAndView("redirect:/tabla/" + consulta.getNombre() + "/", model);
 
     }
     
