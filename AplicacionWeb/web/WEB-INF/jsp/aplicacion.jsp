@@ -7,8 +7,13 @@
         <script src="${pageContext.request.contextPath}/resources/js/jquery.js"></script>
         <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
         <script src="${pageContext.request.contextPath}/resources/js/crud.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/js/bootstrap-datepicker.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/js/bootstrap-datetimepicker.js"></script>
+                
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap-theme.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/datepicker.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/datetimepicker.css" media="screen" />
         <title>Aplicacion Web</title>
     </head>
 

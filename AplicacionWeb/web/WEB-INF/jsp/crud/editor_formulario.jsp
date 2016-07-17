@@ -12,7 +12,7 @@
            cssClass="form-signin"
            role="form" 
            acceptCharset="UTF-8">
-    
+
     <%--<form:hidden id="pk_elememto" path="pk" />--%>
     <%--<input type="hidden" value="${mensaje}" id="mensaje_server" />--%>
 
@@ -31,22 +31,19 @@
                 <c:when test="${campo.tipoDato == 'FECHA'}">
                     <form:input path="mapa['${campo.getNombre()}'].valor"
                                 tabindex="${campo.getIndice()}"
+                                class="fecha form-control"
+                                id="${campo.getNombre()}" />
+                </c:when>
+                <c:when test="${campo.tipoDato == 'FECHA_HORA'}">
+                    <form:input path="mapa['${campo.getNombre()}'].valor"
+                                tabindex="${campo.getIndice()}"
                                 class="fecha-hora form-control"
                                 id="${campo.getNombre()}" />
-                    <script>
-
-                        var componenteFecha = $('.fecha-hora').datepicker({
-                            format: 'dd/mm/yyyy',
-                            autoclose: true
-                        }).on('changeDate', function (ev) {
-                            componenteFecha.hide();
-                        }).data('datepicker');
-                    </script>
                 </c:when>
                 <c:otherwise>
                     <form:input path="mapa['${campo.getNombre()}'].valor" tabindex="${campo.getIndice()}" class="form-control" id="${campo.getNombre()}" />
                 </c:otherwise>
-            </c:choose>            
+            </c:choose>                        
         </div>
     </c:forEach>
 
@@ -123,6 +120,20 @@
             guardarElemento(this);
             event.preventDefault();
         });
+        
+        var componenteFechaHora = $('.fecha-hora').datetimepicker({
+            format: 'dd/mm/yyyy hh:ii:ss',
+            autoclose: true
+        }).on('changeDate', function (ev) {
+            componenteFechaHora.hide();
+        }).data('datetimepicker');
+
+        var componenteFecha = $('.fecha').datepicker({
+            format: 'dd/mm/yyyy',
+            autoclose: true
+        }).on('changeDate', function (ev) {
+            componenteFecha.hide();
+        }).data('datepicker');
     </script>
 
 </form:form> 

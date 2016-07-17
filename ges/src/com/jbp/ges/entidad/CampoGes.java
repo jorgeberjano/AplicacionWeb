@@ -410,9 +410,9 @@ public class CampoGes implements Campo, Serializable {
                 }
                 return Conversion.aCadena(b);
             case FECHA:
-                return Conversion.aFecha(valor).getTexto();
+                return Conversion.aCadena(Conversion.aFecha(valor));
             case FECHA_HORA:
-                return Conversion.aFechaHora(valor).getTexto();
+                return Conversion.aCadena(Conversion.aFechaHora(valor));
             case BYTES:
                 return Base64.encode(Conversion.aByteArray(valor));
             default:
