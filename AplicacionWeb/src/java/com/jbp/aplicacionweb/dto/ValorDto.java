@@ -1,12 +1,13 @@
 package com.jbp.aplicacionweb.dto;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  *
  * @author Jorge
  */
-public class ValorDto {
+public class ValorDto implements Serializable {
 
     private String valor = "";
     private List<String> opciones;

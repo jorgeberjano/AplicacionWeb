@@ -1,21 +1,17 @@
 package com.jbp.aplicacionweb.controlador;
 
 import com.jbp.aplicacionweb.Global;
-import com.jbp.aplicacionweb.dao.ClavePrimaria;
 import com.jbp.aplicacionweb.dto.DatosSesionTabla;
 import com.jbp.aplicacionweb.dto.DtoGenerico;
 import com.jbp.aplicacionweb.dto.FiltroDtoGenerico;
 import com.jbp.aplicacionweb.dto.ServicioPaginacionGenerico;
 import com.jbp.ges.entidad.ConsultaGes;
-import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;

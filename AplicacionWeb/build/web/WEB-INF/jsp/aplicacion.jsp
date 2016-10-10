@@ -13,7 +13,7 @@
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap-theme.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css" media="screen" />
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/datepicker.css" media="screen" />
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/datetimepicker.css" media="screen" />
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/bootstrap-datetimepicker.css" media="screen" />
         <title>Aplicacion Web</title>
     </head>
 
