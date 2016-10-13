@@ -150,10 +150,16 @@ function borrarElemento() {
 function guardarElemento(form) {
     var idConsulta = $("#idConsulta").html();
     var pk = $("#pk").html();
-    var datos = new FormData(form);    
+    var datos = new FormData(form);
+    var url;
+    if (pk) {
+        url = "guardar/" + idConsulta + "/" + pk + "/";
+    } else {
+        url = "guardar/" + idConsulta + "/";
+    }
     $.ajax({
         type: "POST",
-        url: completarUrl("guardar/" + idConsulta + "/" + pk + "/"),
+        url: completarUrl(url),
         contentType: false,
         processData: false,
         data: datos,

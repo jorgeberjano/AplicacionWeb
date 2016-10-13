@@ -3,13 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group name="AplicacionWeb">
-            <file>file:/D:/datos/desarrollo/web/AplicacionWeb/AplicacionWeb/web/WEB-INF/jsp/crud/editor_formulario.jsp</file>
-            <file>file:/D:/datos/desarrollo/web/AplicacionWeb/AplicacionWeb/src/java/com/jbp/aplicacionweb/dao/RepositorioGes.java</file>
-            <file>file:/D:/datos/desarrollo/web/AplicacionWeb/AplicacionWeb/web/WEB-INF/jsp/crud/error.jsp</file>
             <file>file:/D:/datos/desarrollo/web/AplicacionWeb/AplicacionWeb/web/resources/js/crud.js</file>
+            <file>file:/D:/datos/desarrollo/web/AplicacionWeb/AplicacionWeb/web/WEB-INF/jsp/crud/editor.jsp</file>
             <file>file:/D:/datos/desarrollo/web/AplicacionWeb/AplicacionWeb/src/java/com/jbp/aplicacionweb/controlador/ControladorCrud.java</file>
-            <file>file:/D:/datos/desarrollo/web/AplicacionWeb/AplicacionWeb/web/WEB-INF/jsp/crud/tabla.jsp</file>
-            <file>file:/D:/datos/desarrollo/web/AplicacionWeb/AplicacionWeb/src/java/com/jbp/aplicacionweb/dto/ServicioPaginacionGenerico.java</file>
         </group>
         <group>
             <file>file:/C:/personal/proyectos/AplicacionWeb/AplicacionWeb/web/WEB-INF/jsp/aplicacion.jsp</file>
