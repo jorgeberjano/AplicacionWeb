@@ -5,10 +5,9 @@ import com.jbp.ges.entidad.Ges;
 import com.jbp.ges.serializacion.SerializadorGes;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import utiles.sql.GestorConexionUnica;
+import utiles.sql.GestorConexiones;
 
 /**
  *
@@ -16,7 +15,7 @@ import utiles.sql.GestorConexionUnica;
  */
 public class Global {
     
-    private GestorConexionUnica gestorConexion;
+    private PoolConexiones gestorConexiones;
 
     public static Global instancia;
     
@@ -41,10 +40,10 @@ public class Global {
         String url = prop.getProperty("connection.url", "jdbc:jstels:xml:c:/iid/xml/iidlocal.xml");
         String username = prop.getProperty("connection.username", "iidlocal");
         String password = prop.getProperty("connection.password", "shs");        
-        gestorConexion = new GestorConexionUnica(driverClass, url, username, password, true);
+        gestorConexiones = new PoolConexiones(driverClass, url, username, password, true);
         
         try {
-            gestorConexion.inicializar();
+            gestorConexiones.inicializar();
         } catch (ClassNotFoundException ex) {
         }
         
@@ -94,7 +93,7 @@ public class Global {
         return instancia;
     }
 
-    public GestorConexionUnica getGestorConexion() {
-        return gestorConexion;
+    public GestorConexiones getGestorConexiones() {
+        return gestorConexiones;
     }
 }

@@ -24,7 +24,7 @@ public class ServicioPaginacionGenerico implements IServicioPaginacion {
 
     public ServicioPaginacionGenerico(ConsultaGes consulta) {
         this.consulta = consulta;
-        repositorio = new RepositorioGes(Global.getInstancia().getGestorConexion(), consulta);
+        repositorio = new RepositorioGes(Global.getInstancia().getGestorConexiones(), consulta);
     }
 
     public DtoGenerico getDto(String pk) {
