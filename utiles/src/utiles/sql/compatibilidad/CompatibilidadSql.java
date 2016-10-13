@@ -1,8 +1,5 @@
 package utiles.sql.compatibilidad;
 
-import utiles.sql.Secuencia;
-import utiles.sql.SecuenciaMaximoMasUno;
-
 /**
  *
  * @author jberjano
@@ -26,7 +23,11 @@ public class CompatibilidadSql {
         } else if (driver.startsWith("org.apache.derby.jdbc")) {
             return getFormateadorDerby();
         }
-        return null;
+        return getFormateadorPorDefecto();
+    }
+    
+    private static FormateadorSql getFormateadorPorDefecto() {
+        return getFormateadorOracle();
     }
     
     public static FormateadorOracle getFormateadorOracle() {
@@ -49,6 +50,5 @@ public class CompatibilidadSql {
         }
         return formateadorDerby;
     }
-   
 }
 

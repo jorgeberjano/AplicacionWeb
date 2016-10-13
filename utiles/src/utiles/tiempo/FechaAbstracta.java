@@ -10,7 +10,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- *
+ * Clase base para Fecha y FechaHora
  * @author jberjano
  */
 public abstract class FechaAbstracta implements Serializable {

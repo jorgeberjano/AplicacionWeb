@@ -8,7 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Clase que representa a los objetos fecha y hora.
+ * Clase que representa una fecha y una hora.
  *
  * @author jberjano
  */
@@ -104,4 +104,7 @@ public class FechaHora extends FechaAbstracta {
         return Math.abs(milisegundosFechaDesde - milisegundosFechaActual);
     }
 
+    public HoraMinuto getHoraMinuto() {
+        return new HoraMinuto(getCalendar().get(Calendar.HOUR_OF_DAY), getCalendar().get(Calendar.MINUTE));
+    }
 }

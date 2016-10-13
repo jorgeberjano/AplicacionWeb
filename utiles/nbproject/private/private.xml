@@ -37,7 +37,9 @@
         </group>
         <group name="AplicacionWeb"/>
         <group name="web">
-            <file>file:/C:/personal/proyectos/AplicacionWeb/utiles/src/utiles/sql/GestorConexionUnica.java</file>
+            <file>file:/C:/personal/proyectos/AplicacionWeb/utiles/src/utiles/comunicacion/protocolo/Trama.java</file>
+            <file>file:/C:/personal/proyectos/AplicacionWeb/utiles/src/utiles/conversion/Conversion.java</file>
+            <file>file:/C:/personal/proyectos/AplicacionWeb/utiles/src/utiles/comunicacion/ProcesoComunicacion.java</file>
         </group>
     </open-files>
 </project-private>
