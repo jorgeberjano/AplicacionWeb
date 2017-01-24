@@ -49,7 +49,7 @@ public class Global {
         
         gestor = new Ges();        
         SerializadorGes serializador = new SerializadorGes();
-        gestor = serializador.deserializarRecurso("/com/jbp/aplicacionweb/xml/Bp.xml.ges");
+        gestor = serializador.deserializarRecurso("/com/jbp/aplicacionweb/xml/Bp.ges.xml");
     }
     
     public List<ConsultaGes> getConsultas() {

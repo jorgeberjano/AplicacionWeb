@@ -155,7 +155,7 @@ public class RepositorioGes extends Dao implements Dao.Listener {
             entidades = ejecutorSelect.obtenerPaginaEntidades(sentencia.getSql(), constructor,
                     primerElemento, numeroElementos);
         } catch (Exception e) {
-            reportarExcepcion("Error al obtener página de " + consulta.getNombre(), e);
+            reportarExcepcion("Error al obtener una página de " + consulta.getNombre(), e);
         }
         return entidades;
     }
@@ -193,7 +193,7 @@ public class RepositorioGes extends Dao implements Dao.Listener {
         try {
             entidades = ejecutorSelect.obtenerListaEntidades(sentencia.getSql(), constructor);
         } catch (Exception e) {
-            reportarExcepcion("Error al obtener " + consulta.getNombre(), e);
+            reportarExcepcion("Error al obtener la lista filtrada de " + consulta.getNombre(), e);
         }
         return entidades;
     }

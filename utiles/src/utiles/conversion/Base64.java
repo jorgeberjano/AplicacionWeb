@@ -9,78 +9,99 @@ import java.io.ByteArrayOutputStream;
 public class Base64 {
     private final static String base64chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
 
-    public static String encode(byte[] s) {
+    public static String encode(byte[] bytes) {
 
 	// the result/encoded string, the padding string, and the pad count
-	String r = "", p = "";
-	int c = s.length % 3;
+	String resultado = "", padding = "";
+	int i = bytes.length % 3;
 
 	// add a right zero pad to make this string a multiple of 3 characters
-	if (c > 0) {
-	    for (; c < 3; c++) {
-		p += "=";
+	if (i > 0) {
+	    for (; i < 3; i++) {
+		padding += "=";
 	    }
 	}
 
 	// increment over the length of the string, three characters at a time
-	for (c = 0; c < s.length; c += 3) {
+	for (i = 0; i < bytes.length; i += 3) {
 
-	    // we add newlines after every 76 output characters, according to
-	    // the MIME specs
-	    if (c > 0 && (c / 3 * 4) % 76 == 0)
-		r += "\r\n";
+	    // Se agregan saltos de linea cada 76 caracteres, de acuerdo con las 
+	    // especificaciones MIME
+	    if (i > 0 && (i / 3 * 4) % 76 == 0) {
+		resultado += "\r\n";
+            }
 
 	    // these three 8-bit (ASCII) characters become one 24-bit number
-	    int n = (s[c] << 16) + (s[c + 1] << 8)
-		    + (s[c + 2]);
+	    long n = 0;
+            n |= (bytes[i] << 16) & 0xFF0000;
+            
+            if (i + 1 < bytes.length) {
+                n |= (bytes[i + 1] << 8) & 0x00FF00;
+            }
+            if (i + 2 < bytes.length) {
+                n |= (bytes[i + 2]) & 0x0000FF;
+            }
 
 	    // this 24-bit number gets separated into four 6-bit numbers
-	    int n1 = (n >> 18) & 63, n2 = (n >> 12) & 63, n3 = (n >> 6) & 63, n4 = n & 63;
+	    int n1 = (int) ((n >> 18) & 0x3F),
+                n2 = (int) ((n >> 12) & 0x3F),
+                n3 = (int) ((n >> 6) & 0x3F),
+                n4 = (int) (n & 0x3F);
 
 	    // those four 6-bit numbers are used as indices into the base64
 	    // character list
-	    r += "" + base64chars.charAt(n1) + base64chars.charAt(n2)
+	    resultado += "" + base64chars.charAt(n1) + base64chars.charAt(n2)
 		    + base64chars.charAt(n3) + base64chars.charAt(n4);
 	}
 
-	return r.substring(0, r.length() - p.length()) + p;
+	return resultado.substring(0, resultado.length() - padding.length()) + padding;
     }
     
-    public static byte[] decode(String s) {
+    public static byte[] decode(String string) {
 
 	// remove/ignore any characters not in the base64 characters list
 	// or the pad character -- particularly newlines
-	s = s.replaceAll("[^" + base64chars + "=]", "");
+	string = string.replaceAll("[^" + base64chars + "=]", "");
 
-	// replace any incoming padding with a zero pad (the 'A' character is
-	// zero)
-	String p = (s.charAt(s.length() - 1) == '=' ? 
-		(s.charAt(s.length() - 2) == '=' ? "AA" : "A") : "");
-	//String r = "";
+        String p = "";
+	// replace any incoming padding with a zero pad (the 'A' character is zero)
+        if (string.endsWith("==")) {
+            p = "AA";
+        } else if (string.endsWith("=")) {
+            p ="A";
+        }
         ByteArrayOutputStream out = new ByteArrayOutputStream();
-	s = s.substring(0, s.length() - p.length()) + p;
+	string = string.substring(0, string.length() - p.length()) + p;
 
-	// increment over the length of this encoded string, four characters
-	// at a time
-	for (int c = 0; c < s.length(); c += 4) {
+	// increment over the length of this encoded string, four characters at a time
+	for (int i = 0; i < string.length(); i += 4) {
 
 	    // each of these four characters represents a 6-bit index in the
 	    // base64 characters list which, when concatenated, will give the
 	    // 24-bit number for the original 3 characters
-	    int n = (base64chars.indexOf(s.charAt(c)) << 18)
-		    + (base64chars.indexOf(s.charAt(c + 1)) << 12)
-		    + (base64chars.indexOf(s.charAt(c + 2)) << 6)
-		    + base64chars.indexOf(s.charAt(c + 3));
+            
+            int n1 = base64chars.indexOf(string.charAt(i));
+            int n2 = base64chars.indexOf(string.charAt(i + 1));
+            int n3 = base64chars.indexOf(string.charAt(i + 2));
+            int n4 = base64chars.indexOf(string.charAt(i + 3));            
+	    int n = (n1 << 18) | (n2 << 12) | (n3 << 6) | n4;
 
-	    // split the 24-bit number into the original three 8-bit (ASCII)
-	    // characters
-	    out.write((n >>> 16) & 0xFF);
-            out.write((n >>> 8) & 0xFF);
+	    // split the 24-bit number into the original three 8-bit (ASCII) characters
+	    out.write((n >> 16) & 0xFF);
+            
+            if (i + 2 >= string.length() - p.length()) {
+                break;
+            }
+            
+            out.write((n >> 8) & 0xFF);
+            
+            if (i + 3 >= string.length() - p.length()) {
+                break;
+            }
+            
             out.write(n & 0xFF);
 	}
 
-	// remove any zero pad that was added to make this a multiple of 24 bits
-	//String resultado = r.substring(0, r.length() - p.length());
         return out.toByteArray();
     }
 }

@@ -3,8 +3,10 @@ package utiles.conversion;
 import java.io.ByteArrayOutputStream;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
+import utiles.buffer.Buffer;
 import utiles.tiempo.Fecha;
 import utiles.tiempo.FechaHora;
 
@@ -23,10 +25,6 @@ public class Conversion {
 
         String[] cadenasFalse = {"no", "false", "falso", "f"};
         conjuntoCadenasFalse = new HashSet(Arrays.asList(cadenasFalse));
-    }
-
-    public static String toString(Object obj) {
-        return obj == null ? null : obj.toString();
     }
 
     public static Integer toInteger(Object obj) {
@@ -80,7 +78,7 @@ public class Conversion {
 
         return resultado;
     }
-
+    
     public static Boolean toBoolean(Object obj) {
         if (obj == null) {
             return null;
@@ -104,27 +102,84 @@ public class Conversion {
         }
         return null;
     }
-
-    public static Double toDouble(Object obj) {
-        if (obj == null) {
+    
+    public static String toString(Object valor) {
+        if (valor == null) {
             return null;
+        } else if (valor instanceof String) {
+            return (String) valor;
+        } else if (valor instanceof byte[]) {
+            return Base64.encode((byte[]) valor);
+        } else if (valor instanceof Buffer) {
+            return Base64.encode(((Buffer) valor).getBytes());
+        } else {
+            return valor.toString();
         }
-        if (obj instanceof Double) {
-            return (Double) obj;
-        }
-        if (obj instanceof Float) {
-            return ((Float) obj).doubleValue();
-        }
-
-        Double resultado = null;
-        try {
-            resultado = Double.parseDouble(obj.toString());
-        } catch (Exception e) {
-        }
-
-        return resultado;
     }
 
+    public static Double toDouble(Object valor) {
+        if (valor == null) {
+            return null;
+        } else if (valor instanceof Double) {
+            return (Double) valor;
+        } else if (valor instanceof Float) {
+            return new Double((Float) valor);
+        } else {
+            try {
+                return Double.parseDouble(valor.toString());
+            } catch (Exception e) {
+                return null;
+            }
+        }
+    }
+
+    public static byte[] toByteArray(Object valor) {
+        if (valor == null) {
+            return null;
+        } else if (valor instanceof byte[]) {
+            return (byte[]) valor;
+        } else if (valor instanceof String) {
+            return Base64.decode((String) valor);
+        } else {
+            return valor.toString().getBytes();
+        }
+    }
+    
+    public static Buffer toBuffer(Object valor) {
+        if (valor == null) {
+            return null;
+        } else if (valor instanceof Buffer) {
+            return (Buffer) valor;
+        } else {
+            byte[] bytes = toByteArray(valor);
+            return new Buffer(bytes);
+        }
+    }
+
+    public static Fecha toFecha(Object valor) {
+        if (valor == null) {
+            return null;
+        } else if (valor instanceof Fecha) {
+            return (Fecha) valor;
+        } else if (valor instanceof FechaHora) {
+            return ((FechaHora) valor).getFecha();
+        } else {
+            return new Fecha(valor.toString());
+        }
+    }
+  
+    public static FechaHora toFechaHora(Object valor) {
+        if (valor == null) {
+            return null;
+        } else if (valor instanceof Fecha) {
+            return new FechaHora((Fecha) valor);
+        } else if (valor instanceof FechaHora) {
+            return (FechaHora) valor;
+        } else {
+            return new FechaHora(valor.toString());
+        }
+    }
+        
     public static byte[] hexToBytes(String s) {
         int len = s.length();
         byte[] data = new byte[len / 2];
@@ -205,7 +260,12 @@ public class Conversion {
             } else if (str.startsWith("'")) {
                 return (byte) str.charAt(1);
             } else {
-                return Byte.parseByte(str);
+                Byte octeto = Ascii.fromString(str);
+                if (octeto != null) {
+                    return octeto;
+                } else {
+                    return Byte.parseByte(str);
+                }
             }
         } catch (Exception ex) {
             return 0;
@@ -242,74 +302,6 @@ public class Conversion {
         }
     }
     
-    public static Boolean aBooleano(Object valor) {
-        return toBoolean(valor);
-    }
-
-    public static String aCadena(Object valor) {
-        if (valor == null) {
-            return null;
-        } else if (valor instanceof String) {
-            return (String) valor;
-        } else {
-            return valor.toString();
-        }
-    }
-
-    public static Long aEntero(Object valor) {
-        return toLong(valor);
-    }
-
-    public static Double aReal(Object valor) {
-        if (valor == null) {
-            return null;
-        } else if (valor instanceof Double) {
-            return (Double) valor;
-        } else if (valor instanceof Float) {
-            return new Double((Float) valor);
-        } else {
-            try {
-                return Double.parseDouble(valor.toString());
-            } catch (Exception e) {
-                return null;
-            }
-        }
-    }
-
-    public static byte[] aByteArray(Object valor) {
-        if (valor == null) {
-            return null;
-        } else if (valor instanceof byte[]) {
-            return (byte[]) valor;
-        } else {
-            return valor.toString().getBytes();
-        }
-    }
-
-    public static Fecha aFecha(Object valor) {
-        if (valor == null) {
-            return null;
-        } else if (valor instanceof Fecha) {
-            return (Fecha) valor;
-        } else if (valor instanceof FechaHora) {
-            return ((FechaHora) valor).getFecha();
-        } else {
-            return new Fecha(valor.toString());
-        }
-    }
-
-    public static FechaHora aFechaHora(Object valor) {
-        if (valor == null) {
-            return null;
-        } else if (valor instanceof Fecha) {
-            return new FechaHora((Fecha) valor);
-        } else if (valor instanceof FechaHora) {
-            return (FechaHora) valor;
-        } else {
-            return new FechaHora(valor.toString());
-        }
-    }
-
     public static String quitarAcentos(String input) {
         // Cadena de caracteres original a sustituir.
         String original = "áàäéèëíìïóòöúùuñÁÀÄÉÈËÍÌÏÓÒÖÚÙÜÑçÇ";
@@ -331,5 +323,27 @@ public class Conversion {
             textoCapitalizado += texto.substring(1);
         }
         return textoCapitalizado;
+    }    
+    
+    public static List<String> convertirTextoEnLista(String texto) {
+        String elementos[] = texto.split(",");
+        return Arrays.asList(elementos);
+    }
+    
+    public static String convertirListaEnTexto(List<String> lista) {
+        if (lista == null) {
+            return null;
+        }
+        StringBuilder builder = new StringBuilder();
+        boolean primero = true;
+        for (String elemento : lista) {            
+            if (!primero) {
+                builder.append(',');
+            } else {
+                primero = false;
+            }
+            builder.append(elemento);            
+        }
+        return builder.toString();        
     }
 }

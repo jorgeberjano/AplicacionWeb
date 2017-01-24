@@ -5,9 +5,9 @@
 
 <div>
     <div id="error" class="container">
-        <h3>
+        <h1>
             <spring:message code="error.titulo" />
-        </h3>
+        </h1>
         <div class="row spacer separador"></div>
 
         <div><c:out value="${mensaje_error}" /></div>

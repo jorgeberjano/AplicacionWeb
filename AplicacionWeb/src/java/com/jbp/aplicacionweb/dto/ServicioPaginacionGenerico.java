@@ -11,10 +11,10 @@ import java.util.List;
 import utiles.conversion.Conversion;
 
 /**
- *
+ * Servicio de paginación generico.
  * @author jberjano
  */
-public class ServicioPaginacionGenerico implements IServicioPaginacion {
+public class ServicioPaginacionGenerico {
 
     private final RepositorioGes repositorio;
     private final boolean usarCache = true;
@@ -27,7 +27,7 @@ public class ServicioPaginacionGenerico implements IServicioPaginacion {
         repositorio = new RepositorioGes(Global.getInstancia().getGestorConexiones(), consulta);
     }
 
-    public DtoGenerico getDto(String pk) {
+    public Object getDto(String pk) {
         ClavePrimaria clavePrimaria = parsearClavePrimaria(pk);
         EntidadGes entidad = repositorio.getEntidad(clavePrimaria);
         if (entidad == null) {
@@ -58,7 +58,7 @@ public class ServicioPaginacionGenerico implements IServicioPaginacion {
         }
         return dto;
     }
-    
+        
     public String guardarDto(String pk, DtoGenerico dto) {
         if (dto == null || consulta == null) {
             return null;
@@ -67,10 +67,10 @@ public class ServicioPaginacionGenerico implements IServicioPaginacion {
         EntidadGes entidad = dto.getEntidad(consulta);
         entidad.setClavePrimaria(clavePrimaria);
         boolean ok = repositorio.guardar(entidad);
-        if (ok) {
-            limpiarCache();
-        }        
-        
+        if (!ok) {            
+            return null;
+        }
+        limpiarCache();
         return entidad.getClavePrimaria().toString();
     }
 
@@ -101,6 +101,7 @@ public class ServicioPaginacionGenerico implements IServicioPaginacion {
             if (listaEntidades == null) {
                 return false;
             }
+            System.out.println("Crear caché");
             cacheDto = new ArrayList();
             for (EntidadGes entidad : listaEntidades) {
                 cacheDto.add(new DtoGenerico(entidad, consulta));
@@ -113,13 +114,12 @@ public class ServicioPaginacionGenerico implements IServicioPaginacion {
         return true;
     }
 
-    public synchronized void limpiarCache() {
-        cacheDto = null;
-    }
-
-    @Override
+    public synchronized void limpiarCache() {     
+        cacheDto = null;        
+    }    
+    
     public boolean actualizarPagina(DatosSesionTabla datosPagina) {
-
+              
         if (usarCache) {
             return actualizarPaginaConCache(datosPagina);
         }
@@ -169,62 +169,7 @@ public class ServicioPaginacionGenerico implements IServicioPaginacion {
         return list;
     }
 
-//    public ClavePrimaria parsearClavePrimaria(String cadena) {
-//        return new ClavePrimaria(cadena);
-//    }
-    @Override
     public String getMensajeError() {
         return repositorio.getMensajeError();
     }
-
-//    public Object getBeanEdicion(String pk) {
-//        EntidadGes entidad = repositorio.getEntidad(parsearClavePrimaria(pk));
-//        Object bean = crearBeanEdicion();
-//        for (String nombreAtributo : entidad.getNombres()) {
-//            TipoDao valor = entidad.get(nombreAtributo);
-//            Reflexion.asignarValorAtributoSimple(bean, nombreAtributo, valor);
-//        }
-//        return bean;
-//    }
-//    public Object crearBeanEdicion() {
-//
-//        String nombreClase = Conversion.capitalizar(consulta.getIdConsulta());
-//       
-//        String codigoFuenteBean = construirCodigoFuente(nombreClase);
-//
-//        Class beanClass = Reflexion.crearClase(nombreClase, "d:/temp", codigoFuenteBean);
-//        if (beanClass == null) {
-//            return null;
-//        }
-//        try {
-//            return beanClass.newInstance();
-//        } catch (InstantiationException | IllegalAccessException ex) {
-//            return null;
-//        }
-//    }
-//    private String construirCodigoFuente(String nombreClase) {
-//        
-//        StringBuilder codigoFuenteBean = new StringBuilder();
-//        codigoFuenteBean.append("public class " + nombreClase + " {\n");
-//        for (CampoGes campo : consulta.getListaCampos()) {
-//
-//            String tipo = "String";//campo.getTipoDatoJava();
-//            String nombreAtributo = campo.getNombre();
-//            String nombreAtributoCapitalizado = Conversion.capitalizar(nombreAtributo);
-//
-//            codigoFuenteBean
-//                    .append("   private " + tipo + " " + nombreAtributo + ";\n")
-//                    .append("   public void set" + nombreAtributoCapitalizado + "(" + tipo + " " + nombreAtributo + ") {\n")
-//                    .append("      this." + nombreAtributo + " = " + nombreAtributo + ";\n")
-//                    .append("   }\n")
-//                    .append("   public " + tipo + " get" + nombreAtributoCapitalizado + "() {\n")
-//                    .append("      return this." + nombreAtributo + ";\n")
-//                    .append("   }\n");
-//
-//        }
-//        codigoFuenteBean.append("}");
-//        return codigoFuenteBean.toString();
-//    }
-
-
 }

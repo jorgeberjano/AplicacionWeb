@@ -7,17 +7,19 @@ import utiles.tiempo.Fecha;
 import utiles.tiempo.FechaHora;
 
 /**
- *
+ * Formateador para bases de datos Oracle
  * @author jberjano
  */
 public class FormateadorOracle implements FormateadorSql {
+    
+    public static String formatoFecha = "dd/MM/yyyy";
 
     @Override
     public String getFechaSql(Fecha fecha) {
         if (fecha == null) {
             return "null";
         }
-        return "TO_DATE('" + fecha.toString() + "', 'dd/MM/yyyy')";
+        return "TO_DATE('" + fecha.formatear(formatoFecha) + "', '" + formatoFecha + "')";
     }
 
     @Override
@@ -25,7 +27,7 @@ public class FormateadorOracle implements FormateadorSql {
         if (fechaHora == null) {
             return "null";
         }
-        return "TO_DATE('" + fechaHora.toString() + "', 'dd/MM/yyyy hh24:mi:ss')";
+        return "TO_DATE('" + fechaHora.formatear(formatoFecha + " HH:mm:ss") + "', '" + formatoFecha + " hh24:mi:ss')";
     }
 
     @Override

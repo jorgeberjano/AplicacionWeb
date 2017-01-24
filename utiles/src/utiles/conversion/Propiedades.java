@@ -26,11 +26,16 @@ public class Propiedades {
     
     public Propiedades(Properties properties, String namespace) {
         this.properties = properties;
-        this.namespace = namespace.endsWith(".") ? namespace : namespace + ".";
+        this.namespace = namespace;
     }
     
     public Propiedades(Propiedades propiedades, String namespace) {
-        this(propiedades.getProperties(), namespace);
+        
+        this(propiedades.getProperties(), concatenar(propiedades.namespace, namespace));
+    }
+    
+    public Propiedades getPropiedades(String namespace) {
+        return new Propiedades(this, namespace);
     }
     
     public void cargar(InputStream inputStream) throws IOException {
@@ -50,55 +55,76 @@ public class Propiedades {
     }
     
     public String getString(String nombre, String valorPorDefecto) {
-        return properties.getProperty(namespace + nombre, valorPorDefecto);
+        return getProperty(nombre, valorPorDefecto);
     }
     
     public void setString(String nombre, String valor) {
-        properties.setProperty(namespace + nombre, valor);        
+        setProperty(nombre, valor);        
     }
     
     public Integer getInteger(String nombre, Integer valorPorDefecto) {
         
-        String valorCadena = properties.getProperty(namespace + nombre);
+        String valorCadena = getProperty(nombre);
         Integer valor = Conversion.toInteger(valorCadena);
         return valor != null ? valor : valorPorDefecto;        
     }
     
     public void setInteger(String nombre, Integer valor) {
-        properties.setProperty(namespace + nombre, Integer.toString(valor));        
+        setProperty(nombre, Integer.toString(valor));        
     }
     
-    public Long getLong(String nombre, Long valorPorDefecto) {
-        
-        String valorCadena = properties.getProperty(namespace + nombre);
+    public Long getLong(String nombre, Long valorPorDefecto) {        
+        String valorCadena = getProperty(nombre);
         Long valor = Conversion.toLong(valorCadena);
         return valor != null ? valor : valorPorDefecto;        
     }
     
     public void setLong(String nombre, Long valor) {
-        properties.setProperty(namespace + nombre, Long.toString(valor));        
+        setProperty(nombre, Long.toString(valor));
     }
     
     public Boolean getBoolean(String nombre, Boolean valorPorDefecto) {
-        
-        String valorCadena = properties.getProperty(namespace + nombre);
+        String valorCadena = getProperty(nombre);
         Boolean valor = Conversion.toBoolean(valorCadena);
         return valor != null ? valor : valorPorDefecto;        
     }
     
     public void setBoolean(String nombre, boolean valor) {
-        properties.setProperty(namespace + nombre, valor ? "si" : "no");
+        setProperty(nombre, valor ? "si" : "no");
     }
     
     public Double getDouble(String nombre, Double valorPorDefecto) {
         
-        String valorCadena = properties.getProperty(namespace + nombre);
+        String valorCadena = getProperty(nombre);
         Double valor = Conversion.toDouble(valorCadena);
         return valor != null ? valor : valorPorDefecto;        
     }
     
     public void setDouble(String nombre, Double valor) {
-        properties.setProperty(namespace + nombre, Double.toString(valor));        
+        setProperty(nombre, Double.toString(valor));
+    }
+    
+    private String getProperty(String nombre) {
+        return getProperty(nombre, "");
+    }
+    
+    private String getProperty(String nombre, String valorPorDefecto) {
+        return properties.getProperty(concatenar(namespace, nombre), valorPorDefecto);
+    }
+    
+    private void setProperty(String nombre, String valor) {
+        properties.setProperty(concatenar(namespace, nombre), valor);
+    }
+    
+    private static String concatenar(String str1, String str2) {
+        if (Conversion.isBlank(str1)) {
+            return str2;
+        } else if (Conversion.isBlank(str2)) {
+            return str1;
+        } else {
+            return str1 + "." + str2;
+        }
+                    
     }
     
 }

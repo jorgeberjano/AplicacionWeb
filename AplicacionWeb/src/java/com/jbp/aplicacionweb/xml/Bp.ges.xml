@@ -1,67 +1,7 @@
 <raiz>
     <version>8</version>
     <nombreBaseDatos>D:\Sipac\Bp\BpAncasa\bin\Bp.mdb</nombreBaseDatos>
-    <estilo>0x0</estilo>
-    <consultaPantalla>
-        <nombre>Copia de Empresas</nombre>
-        <tabla>Empresas</tabla>
-        <sql>SELECT empCodigo AS id, empNombre FROM Empresas</sql>
-        <nombreSubconsultas></nombreSubconsultas>
-        <camposFiltroPrevio></camposFiltroPrevio>
-        <imagen>1</imagen>
-        <estilo>0x150001</estilo>
-        <nombreEnSingular>Empresa</nombreEnSingular>
-        <camposPorDefecto></camposPorDefecto>
-        <valoresPorDefecto></valoresPorDefecto>
-        <estiloImpresion>0xc4</estiloImpresion>
-        <tituloImpresion></tituloImpresion>
-        <subtituloImpresion></subtituloImpresion>
-        <encabezadoImpresion></encabezadoImpresion>
-        <pieImpresion></pieImpresion>
-        <textoInicialImpresion></textoInicialImpresion>
-        <textoFinalImpresion></textoFinalImpresion>
-        <consultasSeleccionPrevia></consultasSeleccionPrevia>
-        <campo>
-            <nombre>id</nombre>
-            <tabla></tabla>
-            <campo>id</campo>
-            <titulo>Código</titulo>
-            <tipoDato>CADENA</tipoDato>
-            <tipoRol>NORMAL</tipoRol>
-            <alineacion>0</alineacion>
-            <longitud>10</longitud>
-            <formato>%s</formato>
-            <unidad></unidad>
-            <decimales>0</decimales>
-            <estilo>0x54</estilo>
-            <expresionGT></expresionGT>
-            <formatoGT></formatoGT>
-            <consultaSeleccion></consultaSeleccion>
-            <valorNulo></valorNulo>
-            <nombreCampoRelacion></nombreCampoRelacion>
-            <valorPorDefecto></valorPorDefecto>
-        </campo>
-        <campo>
-            <nombre>empNombre</nombre>
-            <tabla>Empresas</tabla>
-            <campo>empNombre</campo>
-            <titulo>Nombre</titulo>
-            <tipoDato>CADENA</tipoDato>
-            <tipoRol>NORMAL</tipoRol>
-            <alineacion>0</alineacion>
-            <longitud>30</longitud>
-            <formato>%s</formato>
-            <unidad></unidad>
-            <decimales>0</decimales>
-            <estilo>0x10</estilo>
-            <expresionGT></expresionGT>
-            <formatoGT></formatoGT>
-            <consultaSeleccion></consultaSeleccion>
-            <valorNulo></valorNulo>
-            <nombreCampoRelacion></nombreCampoRelacion>
-            <valorPorDefecto></valorPorDefecto>
-        </campo>
-    </consultaPantalla>
+    <estilo>0x0</estilo>    
     <consultaPantalla>
         <nombre>Empresas</nombre>
         <tabla>Empresas</tabla>

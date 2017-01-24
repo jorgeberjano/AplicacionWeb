@@ -117,8 +117,8 @@
     --%>
     <script>
         $("#formulario").submit(function (event) {
-            guardarElemento(this);
             event.preventDefault();
+            guardarElemento(this);            
         });
         
         var componenteFechaHora = $('.fecha-hora').datetimepicker({

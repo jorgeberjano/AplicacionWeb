@@ -1,4 +1,3 @@
-
 package utiles.tiempo;
 
 import java.io.Serializable;
@@ -11,19 +10,20 @@ import java.util.Date;
 
 /**
  * Clase base para Fecha y FechaHora
+ *
  * @author jberjano
  */
 public abstract class FechaAbstracta implements Serializable {
-    
+
     private DateFormat formato;
     private Calendar calendar;
     protected boolean esPresente;
-       
+
     public FechaAbstracta() {
         this.calendar = Calendar.getInstance();
         normalizar();
     }
-    
+
     public FechaAbstracta(Calendar calendar) {
         this.calendar = calendar;
         normalizar();
@@ -38,19 +38,19 @@ public abstract class FechaAbstracta implements Serializable {
             normalizar();
         }
     }
-    
-    public FechaAbstracta(long milisegundos) {  
+
+    public FechaAbstracta(long milisegundos) {
         this.calendar = Calendar.getInstance();
         this.calendar.setTimeInMillis(milisegundos);
-        normalizar();   
+        normalizar();
     }
-    
+
     public boolean esPresente() {
         return esPresente;
     }
-    
+
     protected abstract void normalizar();
-    
+
     public abstract DateFormat getFormatoPorDefecto();
 
     public DateFormat getFormato() {
@@ -60,20 +60,13 @@ public abstract class FechaAbstracta implements Serializable {
     public void setFormato(DateFormat formato) {
         this.formato = formato;
     }
-    
+
     public boolean esValida() {
         return getCalendar() != null;
     }
 
     public boolean esNula() {
         return getCalendar() == null;
-    }
-
-    public boolean posteriorA(FechaAbstracta otraFecha) {
-        if (esNula()) {
-            return false;
-        }
-        return getCalendar().after(otraFecha.getCalendar());
     }
 
     public boolean esAnteriorA(FechaAbstracta otraFecha) {
@@ -96,7 +89,7 @@ public abstract class FechaAbstracta implements Serializable {
         }
         return esMismoDia(otraFecha.getCalendar());
     }
-    
+
     public boolean esMismoDia(Calendar otroCalendar) {
         if (esNula() || otroCalendar == null) {
             return false;
@@ -106,7 +99,7 @@ public abstract class FechaAbstracta implements Serializable {
                 && getCalendar().get(Calendar.MONTH) == otroCalendar.get(Calendar.MONTH)
                 && getCalendar().get(Calendar.YEAR) == otroCalendar.get(Calendar.YEAR);
     }
-  
+
     public boolean esHoy() {
         return esMismoDia(Calendar.getInstance());
     }
@@ -146,7 +139,7 @@ public abstract class FechaAbstracta implements Serializable {
         getCalendar().set(Calendar.DAY_OF_WEEK, numeroDiaDeLaSemana);
     }
 
-    public boolean esFuturo() {        
+    public boolean esFuturo() {
         if (esNula()) {
             return false;
         }
@@ -187,7 +180,7 @@ public abstract class FechaAbstracta implements Serializable {
         }
         if (obj == this) {
             return true;
-        }       
+        }
         FechaAbstracta otraFecha = (FechaAbstracta) obj;
         return getCalendar().equals(otraFecha.getCalendar());
     }
@@ -196,7 +189,6 @@ public abstract class FechaAbstracta implements Serializable {
     public int hashCode() {
         return (int) this.getCalendar().getTimeInMillis();
     }
-
 
     public Calendar toCalendar() {
         return getCalendar();
@@ -208,8 +200,7 @@ public abstract class FechaAbstracta implements Serializable {
         }
         return getCalendar().getTime();
     }
-    
-    
+
     public java.sql.Date toSqlDate() {
         if (esNula()) {
             return null;
@@ -223,7 +214,7 @@ public abstract class FechaAbstracta implements Serializable {
         }
         return new Timestamp(getCalendar().getTimeInMillis());
     }
-    
+
     public int compareTo(FechaAbstracta otraFecha) {
         if (esNula()) {
             return otraFecha.esNula() ? 0 : 1;
@@ -242,32 +233,35 @@ public abstract class FechaAbstracta implements Serializable {
         this.calendar = calendar;
         normalizar();
     }
-    
+
     public String formatear(String formato) {
         return formatear(new SimpleDateFormat(formato));
-    } 
-    
+    }
+
     public String formatear(DateFormat formateador) {
         if (esNula()) {
             return "";
         } else {
             return formateador.format(getCalendar().getTime());
         }
-    } 
-        
+    }
+
     @Override
     public String toString() {
         return formatear(getFormato());
     }
-    
+
     public String getTexto() {
         return toString();
     }
-    
+
     public void setTexto(String texto) {
+        if (calendar == null) {
+            calendar = Calendar.getInstance();
+        }
         try {
             calendar.setTime(getFormato().parse(texto));
-        } catch (ParseException ex) {
+        } catch (Exception ex) {
             calendar = null;
         }
     }

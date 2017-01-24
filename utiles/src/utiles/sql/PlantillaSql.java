@@ -7,9 +7,11 @@ import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
@@ -159,6 +161,16 @@ public class PlantillaSql {
             return formateadorSql.getFechaHoraSql((FechaHora) valor);
         } else if (valor instanceof Boolean) {
             return formateadorSql.getBooleanSql((Boolean) valor);
+        } else if (valor instanceof Collection) {
+            String resultado = "";
+            Iterator iterador = ((Collection) valor).iterator();            
+            while (iterador.hasNext()) {
+                if (!resultado.isEmpty()) {
+                    resultado += ", ";
+                }
+                resultado += formatearValor(iterador.next());
+            }
+            return resultado;
         }
         return "'" + valor.toString() + "'";
     }

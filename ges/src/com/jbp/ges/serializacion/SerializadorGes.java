@@ -20,7 +20,7 @@ public class SerializadorGes {
 //    public static void main(String[] args) {
 //        SerializadorGes serializador = new SerializadorGes();
 //
-//        Ges gestor = serializador.deserializar("xml/bp.xml.ges");
+//        Ges gestor = serializador.deserializar("xml/bp.ges.xml");
 //        serializador.serializar("d:/ges.xml", gestor);
 //    }
 

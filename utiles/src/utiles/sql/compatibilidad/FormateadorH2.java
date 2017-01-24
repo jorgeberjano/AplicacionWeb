@@ -13,19 +13,19 @@ import utiles.tiempo.Fecha;
 import utiles.tiempo.FechaHora;
 
 /**
- *
+ * Formateador para bases de datos H2
  * @author jberjano
  */
 public class FormateadorH2 implements FormateadorSql {
 
     @Override
     public String getFechaSql(Fecha fecha) {
-        return "parsedatetime('" + fecha.toString() + "', 'dd-MM-yyyy')";
+        return "parsedatetime('" + fecha.formatear("dd-MM-yyyy") + "', 'dd-MM-yyyy')";
     }
 
     @Override
     public String getFechaHoraSql(FechaHora fechaHora) {
-        return "parsedatetime('" + fechaHora.toString() + "', 'dd-MM-yyyy hh:mm:ss')";
+        return "parsedatetime('" + fechaHora.formatear("dd-MM-yyyy hh:mm:ss") + "', 'dd-MM-yyyy hh:mm:ss')";
     }
 
     @Override

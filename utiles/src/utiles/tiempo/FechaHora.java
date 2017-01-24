@@ -85,7 +85,7 @@ public class FechaHora extends FechaAbstracta {
     }
 
     public Fecha getFecha() {
-        Fecha fecha = new Fecha(getCalendar());
+        Fecha fecha = new Fecha((Calendar) getCalendar().clone());
         return fecha;
     }
 

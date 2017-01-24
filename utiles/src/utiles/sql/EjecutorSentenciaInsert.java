@@ -30,8 +30,12 @@ public class EjecutorSentenciaInsert extends EjecutorSentenciaGuardado {
         try {
             SentenciaSql sentencia = new SentenciaSql();
             sentencia.insert(tabla);
+            
             List<Campo> camposAsignables = new ArrayList<Campo>();
-            for (Campo campo : listaCampos) {
+            List<Campo> listaTodosCampos = new ArrayList<Campo>();
+            listaTodosCampos.addAll(listaPKs);
+            listaTodosCampos.addAll(listaCampos);
+            for (Campo campo : listaTodosCampos) {
                 String valorSql = getSqlValor(campo);
                 if (valorSql.equals("?")) {
                     sentencia.asignarLuego(campo.nombre);

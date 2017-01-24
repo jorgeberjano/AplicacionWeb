@@ -9,5 +9,10 @@
         <group name="web">
             <file>file:/C:/personal/proyectos/AplicacionWeb/ges/src/com/jbp/ges/entidad/CampoGes.java</file>
         </group>
+        <group name="Turnos">
+            <file>file:/C:/personal/proyectos/AplicacionWeb/ges/src/com/jbp/ges/serializacion/SerializadorGes.java</file>
+            <file>file:/C:/personal/proyectos/AplicacionWeb/ges/src/com/jbp/ges/entidad/ConsultaGes.java</file>
+            <file>file:/C:/personal/proyectos/AplicacionWeb/ges/src/com/jbp/ges/entidad/CampoGes.java</file>
+        </group>
     </open-files>
 </project-private>

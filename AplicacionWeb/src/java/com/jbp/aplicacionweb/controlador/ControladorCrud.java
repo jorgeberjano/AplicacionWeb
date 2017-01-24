@@ -7,6 +7,7 @@ import com.jbp.aplicacionweb.dto.FiltroDtoGenerico;
 import com.jbp.aplicacionweb.dto.ServicioPaginacionGenerico;
 import com.jbp.ges.entidad.ConsultaGes;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
@@ -27,19 +28,24 @@ import utiles.conversion.Conversion;
 public class ControladorCrud {
         
     
-    private DatosSesionTabla obtenerDatosSesion(HttpServletRequest request, ConsultaGes consulta) {
+    private DatosSesionTabla obtenerDatosSesion(HttpSession sesion, ConsultaGes consulta) {
         
         DatosSesionTabla datosSesionTabla;
-        
-        Object atributoSesion = request.getSession().getAttribute(consulta.getIdConsulta());
-         
-        if (atributoSesion instanceof DatosSesionTabla) {
-            datosSesionTabla = (DatosSesionTabla) atributoSesion;
-        } else {
-            datosSesionTabla = new DatosSesionTabla();
-            datosSesionTabla.setServicioPaginacion(new ServicioPaginacionGenerico(consulta));
-            datosSesionTabla.setFiltro(new FiltroDtoGenerico());
-            request.getSession().setAttribute(consulta.getIdConsulta(), datosSesionTabla);  
+        try {
+            
+
+            Object atributoSesion = sesion.getAttribute(consulta.getIdConsulta());
+
+            if (atributoSesion instanceof DatosSesionTabla) {
+                datosSesionTabla = (DatosSesionTabla) atributoSesion;
+            } else {
+                datosSesionTabla = new DatosSesionTabla();
+                datosSesionTabla.setServicioPaginacion(new ServicioPaginacionGenerico(consulta));
+                datosSesionTabla.setFiltro(new FiltroDtoGenerico());
+                sesion.setAttribute(consulta.getIdConsulta(), datosSesionTabla);  
+            }
+        } catch (Exception ex) {
+            return null;
         }
         
         return datosSesionTabla;
@@ -55,7 +61,10 @@ public class ControladorCrud {
         
         ConsultaGes consulta = Global.getInstancia().getConsultaPorId(idConsulta);
         
-        DatosSesionTabla datosSesion = obtenerDatosSesion(request, consulta);
+        DatosSesionTabla datosSesion = obtenerDatosSesion(request.getSession(), consulta);
+        if (datosSesion == null) {
+            System.err.println("Null!!!");
+        }            
         boolean ok = datosSesion.actualizar();
         if (!ok) {
             model.put("mensaje_error", datosSesion.getMensajeError());
@@ -78,7 +87,7 @@ public class ControladorCrud {
         ConsultaGes consulta = Global.getInstancia().getConsultaPorId(idConsulta);
         String campoSeleccion = request.getParameter("campoSeleccion");
                
-        DatosSesionTabla datosSesion = obtenerDatosSesion(request, consulta);
+        DatosSesionTabla datosSesion = obtenerDatosSesion(request.getSession(), consulta);
         if (!datosSesion.actualizar()) {
             model.put("mensaje_error", datosSesion.getMensajeError());
         }
@@ -102,7 +111,7 @@ public class ControladorCrud {
             ModelMap model) {
 
         ConsultaGes consulta = Global.getInstancia().getConsultaPorId(idConsulta);
-        DatosSesionTabla datosSesion = obtenerDatosSesion(request, consulta);       
+        DatosSesionTabla datosSesion = obtenerDatosSesion(request.getSession(), consulta);       
         datosSesion.setFiltro(filtro);        
         if (!datosSesion.actualizar()) {
             model.put("mensaje_error", datosSesion.getMensajeError());
@@ -127,7 +136,7 @@ public class ControladorCrud {
             ModelMap model) {
 
         ConsultaGes consulta = Global.getInstancia().getConsultaPorId(idConsulta);
-        DatosSesionTabla datosSesion = obtenerDatosSesion(request, consulta);        
+        DatosSesionTabla datosSesion = obtenerDatosSesion(request.getSession(), consulta);        
         datosSesion.setCampoOrden(campoOrden);
         if (!datosSesion.actualizar()) {
             model.put("mensaje_error", datosSesion.getMensajeError());
@@ -161,7 +170,7 @@ public class ControladorCrud {
             ModelMap model) {
 
         ConsultaGes consulta = Global.getInstancia().getConsultaPorId(idConsulta);
-        DatosSesionTabla datosSesion = obtenerDatosSesion(request, consulta);
+        DatosSesionTabla datosSesion = obtenerDatosSesion(request.getSession(), consulta);
         datosSesion.paginar(accion);
         if (datosSesion.actualizar()) {
             model.put("mensaje_error", datosSesion.getMensajeError());
@@ -183,8 +192,9 @@ public class ControladorCrud {
             ModelMap model) {
 
         ConsultaGes consulta = Global.getInstancia().getConsultaPorId(idConsulta);
-        ServicioPaginacionGenerico servicio = new ServicioPaginacionGenerico(consulta);
-        DtoGenerico dto = servicio.getDto(pk);
+        DatosSesionTabla datosSesion = obtenerDatosSesion(request.getSession(), consulta);
+        ServicioPaginacionGenerico servicio = datosSesion.getServicioPaginacion();
+        Object dto = servicio.getDto(pk);
         
         if (dto == null) {
             model.addAttribute("mensaje_error", "No se ha encontrado el elemento " + pk);
@@ -209,9 +219,9 @@ public class ControladorCrud {
             ModelMap model) {
 
         ConsultaGes consulta = Global.getInstancia().getConsultaPorId(idConsulta);
-        ServicioPaginacionGenerico servicio = new ServicioPaginacionGenerico(consulta);
-        //Object beanEdicion = servicio.getBeanEdicion(pk);
-        DtoGenerico dto = servicio.getDto(pk);
+        DatosSesionTabla datosSesion = obtenerDatosSesion(request.getSession(), consulta);
+
+        Object dto = datosSesion.getServicioPaginacion().getDto(pk);
         model.addAttribute("consulta", consulta);
         model.addAttribute("titulo", "Modificar " + consulta.getNombreEnSingular());
         model.addAttribute("pk", pk);
@@ -228,7 +238,9 @@ public class ControladorCrud {
             ModelMap model) {
 
         ConsultaGes consulta = Global.getInstancia().getConsultaPorId(idConsulta);
-        ServicioPaginacionGenerico servicio = new ServicioPaginacionGenerico(consulta);
+        DatosSesionTabla datosSesion = obtenerDatosSesion(request.getSession(), consulta);
+        ServicioPaginacionGenerico servicio = datosSesion.getServicioPaginacion();
+        
         DtoGenerico dto = servicio.crearDto();
         model.addAttribute("consulta", consulta);
         model.addAttribute("titulo", "Crear " + consulta.getNombreEnSingular());
@@ -247,16 +259,8 @@ public class ControladorCrud {
             ModelMap model) {
         
         ConsultaGes consulta = Global.getInstancia().getConsultaPorId(idConsulta);
-             
-//        if (result.hasErrors()) {
-//            model.put("consulta", consulta);
-//            model.addAttribute("beanEdicion", beanEdicion);
-//            model.addAttribute("modo", "editar");
-//            model.addAttribute("mensaje_error", "Se han producido errores");
-//            return new ModelAndView("crud/formulario", model);
-//        }
-
-        ServicioPaginacionGenerico servicio = new ServicioPaginacionGenerico(consulta);
+        DatosSesionTabla datosSesion = obtenerDatosSesion(request.getSession(), consulta);
+        ServicioPaginacionGenerico servicio = datosSesion.getServicioPaginacion();
         String nuevaPk = servicio.guardarDto(null, dto);
                 
         if (Conversion.isBlank(nuevaPk)) {
@@ -279,15 +283,9 @@ public class ControladorCrud {
         
         ConsultaGes consulta = Global.getInstancia().getConsultaPorId(idConsulta);
              
-//        if (result.hasErrors()) {
-//            model.put("consulta", consulta);
-//            model.addAttribute("beanEdicion", beanEdicion);
-//            model.addAttribute("modo", "editar");
-//            model.addAttribute("mensaje_error", "Se han producido errores");
-//            return new ModelAndView("crud/formulario", model);
-//        }
-
-        ServicioPaginacionGenerico servicio = new ServicioPaginacionGenerico(consulta);
+        DatosSesionTabla datosSesion = obtenerDatosSesion(request.getSession(), consulta);
+        ServicioPaginacionGenerico servicio = datosSesion.getServicioPaginacion();
+       
         String nuevaPk = servicio.guardarDto(pk, dto);
                 
         if (nuevaPk == null || pk.isEmpty()) {
@@ -309,7 +307,8 @@ public class ControladorCrud {
             ModelMap model) {
 
         ConsultaGes consulta = Global.getInstancia().getConsultaPorId(idConsulta);
-        ServicioPaginacionGenerico servicio = new ServicioPaginacionGenerico(consulta);
+        DatosSesionTabla datosSesion = obtenerDatosSesion(request.getSession(), consulta);
+        ServicioPaginacionGenerico servicio = datosSesion.getServicioPaginacion();
         
         boolean ok = servicio.borrarDto(pk);
         if (!ok) {
@@ -317,7 +316,7 @@ public class ControladorCrud {
             model.addAttribute("url_retorno", "mostrar/" + idConsulta + "/" + pk + "/");
             return new ModelAndView("crud/error", model);
         }
-        return new ModelAndView("redirect:/tabla/" + consulta.getNombre() + "/", model);
+        return new ModelAndView("redirect:/tabla/" + consulta.getIdConsulta()+ "/", model);
 
     }
     

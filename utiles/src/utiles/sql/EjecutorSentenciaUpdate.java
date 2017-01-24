@@ -16,6 +16,7 @@ public class EjecutorSentenciaUpdate extends EjecutorSentenciaGuardado {
         
     @Override
     public boolean ejecutar() throws SQLException {
+        System.out.println("ejecutar");
         Connection conexion = gestorConexiones.obtenerConexion();
         if (conexion == null) {
             return false;
@@ -56,6 +57,8 @@ public class EjecutorSentenciaUpdate extends EjecutorSentenciaGuardado {
             
             statement = conexion.prepareStatement(sql.toString());
             
+            System.out.println(sql);
+            
             for (Campo campo : listaCampos) {
                 asignarValor(statement, campo.valor);
             }
@@ -66,11 +69,11 @@ public class EjecutorSentenciaUpdate extends EjecutorSentenciaGuardado {
             afectados = statement.executeUpdate();
             //conexion.commit();
         } finally {
+            limpiar();
             if (statement != null) {
                 statement.close();
             }
-            gestorConexiones.liberarConexion(conexion);
-            limpiar();
+            gestorConexiones.liberarConexion(conexion);            
         }
         
         return afectados == 1;

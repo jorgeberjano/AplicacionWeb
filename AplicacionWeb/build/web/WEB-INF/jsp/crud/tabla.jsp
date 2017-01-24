@@ -10,6 +10,7 @@
                 <c:if test='${empty campoSeleccion}'>
                     <button id="boton_crear" type="button" class="btn btn-default"><spring:message code="boton.crear" /></button>
                 </c:if>
+                <button id="boton_actualizar" type="button" class="btn btn-default"><spring:message code="boton.actualizar" /></button>
             </div>
             <div class="col-md-4">
                 <%@include file="paginacion.jsp" %>
@@ -78,6 +79,10 @@
 
         $("#boton_crear").click(function () {
             crearElemento();
+        });
+        
+        $("#boton_actualizar").click(function () {
+            mostrarTablaElementos();
         });
 
         $("th").click(function () {

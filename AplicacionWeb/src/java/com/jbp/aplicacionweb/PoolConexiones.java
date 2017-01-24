@@ -59,7 +59,7 @@ public class PoolConexiones implements GestorConexiones {
     @Override
     public void liberarConexion(Connection conexion) {
         pool.add(conexion);
-        System.out.println("Conexiones: " + pool.size());
+        //System.out.println("Conexiones: " + pool.size());
     }
 
     private ConstructorFechaHora constructorFechaHora = new ConstructorFechaHora();

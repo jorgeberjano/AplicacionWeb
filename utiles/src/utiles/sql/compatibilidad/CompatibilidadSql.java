@@ -9,6 +9,7 @@ public class CompatibilidadSql {
     private static FormateadorOracle formateadorOracle;
     private static FormateadorH2 formateadorH2;
     private static FormateadorDerby formateadorDerby;
+    private static FormateadorXml formateadorXml;
 
     public static FormateadorSql getFormateador(String driver) {
         if (driver == null) {
@@ -17,11 +18,12 @@ public class CompatibilidadSql {
         driver = driver.trim();
         if (driver.startsWith("oracle.jdbc")) {
             return getFormateadorOracle();
-        } else if (driver.startsWith("org.h2") ||
-                driver.startsWith("jstels.jdbc.xml")) {
+        } else if (driver.startsWith("org.h2")) {
             return getFormateadorH2();
         } else if (driver.startsWith("org.apache.derby.jdbc")) {
             return getFormateadorDerby();
+        } else if (driver.startsWith("jstels.jdbc.xml")) {
+            return getFormateadorXml();
         }
         return getFormateadorPorDefecto();
     }
@@ -49,6 +51,13 @@ public class CompatibilidadSql {
             formateadorDerby = new FormateadorDerby();
         }
         return formateadorDerby;
+    }
+    
+    public static FormateadorXml getFormateadorXml() {
+        if (formateadorXml == null) {
+            formateadorXml = new FormateadorXml();
+        }
+        return formateadorXml;
     }
 }
 

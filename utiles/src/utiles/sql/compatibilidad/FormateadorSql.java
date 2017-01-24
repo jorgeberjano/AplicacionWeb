@@ -6,7 +6,7 @@ import utiles.tiempo.Fecha;
 import utiles.tiempo.FechaHora;
 
 /**
- *
+ * Contrato que deben cumplir los formateadores SQL
  * @author jberjano
  */
 public interface FormateadorSql {

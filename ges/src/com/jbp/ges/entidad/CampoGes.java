@@ -267,19 +267,19 @@ public class CampoGes implements Campo, Serializable {
     public Object convertirValor(Object valor) {
         switch (tipoDato) {
             case CADENA:
-                return Conversion.aCadena(valor);
+                return Conversion.toString(valor);
             case ENTERO:
                 if (tieneOpciones()) {
-                    String textoOpcion = Conversion.aCadena(valor);
+                    String textoOpcion = Conversion.toString(valor);
                     Long valorOpcion = parsearOpcion(textoOpcion);
                     return valorOpcion;
                 }
-                return Conversion.aEntero(valor);
+                return Conversion.toInteger(valor);
             case REAL:
-                return Conversion.aReal(valor);
+                return Conversion.toDouble(valor);
             case BOOLEANO:
                 if (tieneOpciones()) {
-                    String textoOpcion = Conversion.aCadena(valor);
+                    String textoOpcion = Conversion.toString(valor);
                     Long valorOpcion = parsearOpcion(textoOpcion);
                     if (valorOpcion == null) {
                         return null;
@@ -293,13 +293,13 @@ public class CampoGes implements Campo, Serializable {
                             return null;
                     }
                 }
-                return Conversion.aBooleano(valor);
+                return Conversion.toBoolean(valor);
             case FECHA:
-                return Conversion.aFecha(valor);
+                return Conversion.toFecha(valor);
             case FECHA_HORA:
-                return Conversion.aFechaHora(valor);
+                return Conversion.toFechaHora(valor);
             case BYTES:
-                return Conversion.aByteArray(valor);
+                return Conversion.toByteArray(valor);
             default:
                 return null;
         }
@@ -366,7 +366,7 @@ public class CampoGes implements Campo, Serializable {
         return 0L;
     }
 
-    public String formatearOpcion(Long valor) {
+    public String formatearOpcion(Integer valor) {
 
         if (!tieneOpciones()) {
             return "";
@@ -395,26 +395,26 @@ public class CampoGes implements Campo, Serializable {
 
         switch (tipoDato) {
             case CADENA:
-                return Conversion.aCadena(valor);
+                return Conversion.toString(valor);
             case ENTERO:
                 if (tieneOpciones()) {
-                    return formatearOpcion(Conversion.aEntero(valor));
+                    return formatearOpcion(Conversion.toInteger(valor));
                 }
-                return Conversion.aCadena(valor);
+                return Conversion.toString(valor);
             case REAL:
-                return Conversion.aCadena(valor);
+                return Conversion.toString(valor);
             case BOOLEANO:
-                Boolean b = Conversion.aBooleano(valor);
+                Boolean b = Conversion.toBoolean(valor);
                 if (tieneOpciones()) {
-                    return formatearOpcion(b == null ? null : (b ? 1L : 0L));
+                    return formatearOpcion(b == null ? null : (b ? 1 : 0));
                 }
-                return Conversion.aCadena(b);
+                return Conversion.toString(b);
             case FECHA:
-                return Conversion.aCadena(Conversion.aFecha(valor));
+                return Conversion.toString(Conversion.toFecha(valor));
             case FECHA_HORA:
-                return Conversion.aCadena(Conversion.aFechaHora(valor));
+                return Conversion.toString(Conversion.toFechaHora(valor));
             case BYTES:
-                return Base64.encode(Conversion.aByteArray(valor));
+                return Base64.encode(Conversion.toByteArray(valor));
             default:
                 return null;
         }

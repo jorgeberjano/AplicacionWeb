@@ -10,27 +10,28 @@ import java.util.List;
  * @author jberjano
  */
 public class DatosSesionTabla implements Serializable {
+
     private int paginaActual;
     private int numeroPaginas;
     private Object filtro;
     private String campoOrden;
     private boolean ordenDescendente;
-    
+
     private List listaElementosPagina;
     private int numeroTotalElementos;
     private String mensajeError;
-    private IServicioPaginacion servicioPaginacion;    
+    private ServicioPaginacionGenerico servicioPaginacion;
 
     public DatosSesionTabla() {
-    //    listaElementosPagina = new ArrayList();
+        //    listaElementosPagina = new ArrayList();
         paginaActual = 1;
     }
 
-    public IServicioPaginacion getServicioPaginacion() {
+    public ServicioPaginacionGenerico getServicioPaginacion() {
         return servicioPaginacion;
     }
 
-    public void setServicioPaginacion(IServicioPaginacion servicioPaginacion) {
+    public void setServicioPaginacion(ServicioPaginacionGenerico servicioPaginacion) {
         this.servicioPaginacion = servicioPaginacion;
     }
 
@@ -54,7 +55,7 @@ public class DatosSesionTabla implements Serializable {
         this.filtro = filtro;
         limpiarCache();
     }
-    
+
     public void setCampoOrden(String campoOrden) {
         if (this.campoOrden != null && this.campoOrden.equals(campoOrden)) {
             ordenDescendente = !ordenDescendente;
@@ -62,7 +63,7 @@ public class DatosSesionTabla implements Serializable {
             ordenDescendente = false;
         }
         this.campoOrden = campoOrden;
-         limpiarCache();
+        limpiarCache();
     }
 
     public String getCampoOrden() {
@@ -74,9 +75,9 @@ public class DatosSesionTabla implements Serializable {
     }
 
     public int getElementosPorPagina() {
-        return Constantes.NUMERO_ELEMENTOS_PAGINA_TABLA;        
+        return Constantes.NUMERO_ELEMENTOS_PAGINA_TABLA;
     }
-    
+
     public List getListaElementosPagina() {
         return listaElementosPagina;
     }
@@ -88,24 +89,23 @@ public class DatosSesionTabla implements Serializable {
     public void setMensajeError(String mensajeError) {
         this.mensajeError = mensajeError;
     }
-    
+
     public boolean actualizar() {
-              
+
         servicioPaginacion.actualizarPagina(this);
-                
+
         if (listaElementosPagina == null) {
             mensajeError = servicioPaginacion.getMensajeError();
             return false;
-        }        
-                
-       
+        }
+
         return listaElementosPagina != null;
     }
 
     public void paginar(String accion) {
-                
+
         numeroPaginas = numeroTotalElementos == 0 ? 0 : (int) Math.ceil((double) numeroTotalElementos / (double) getElementosPorPagina());
-        
+
         switch (accion) {
             case Constantes.PAGINATE_NEXT:
                 paginaActual++;
@@ -124,9 +124,9 @@ public class DatosSesionTabla implements Serializable {
             paginaActual = 1;
         } else if (paginaActual > numeroPaginas) {
             paginaActual = numeroPaginas;
-        }        
+        }
         actualizar();
-        
+
     }
 
     public void setPaginaElementos(List listaElementos) {

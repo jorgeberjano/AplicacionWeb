@@ -91,6 +91,19 @@ public class UtilidadesImagen {
      * @param altoMaximo : alto del contenedor
      */
     public static Image escalarImagen(Image imagen, int anchoMaximo, int altoMaximo) {
+        return escalarImagen(imagen, anchoMaximo, altoMaximo, Image.SCALE_FAST);
+    }
+    
+    /**
+     * Escala la imagen que se pasa como parametro en funcion de su tamaño y del
+     * tamaño del contenedor.
+     *
+     * @param imagen
+     * @param anchoMaximo : ancho del contenedor
+     * @param altoMaximo : alto del contenedor
+     * 
+     */
+    public static Image escalarImagen(Image imagen, int anchoMaximo, int altoMaximo, int hints) {
 
         int anchoImagen = imagen.getWidth(null);
         int altoImagen = imagen.getHeight(null);
@@ -98,7 +111,7 @@ public class UtilidadesImagen {
         if ((altoImagen > altoMaximo || anchoImagen > anchoMaximo) && anchoMaximo > 0 && altoMaximo > 0) {
             Rectangle2D rectanguloContenedor = new Rectangle2D.Double(0, 0, anchoMaximo, altoMaximo);
             Rectangle2D rectanguloImagen = UtilidadesGeometria.rectanguloInscrito(rectanguloContenedor, anchoImagen, altoImagen);
-            imagen = imagen.getScaledInstance((int) rectanguloImagen.getWidth(), (int) rectanguloImagen.getHeight(), Image.SCALE_FAST);
+            imagen = imagen.getScaledInstance((int) rectanguloImagen.getWidth(), (int) rectanguloImagen.getHeight(), hints);
         }
         return imagen;
     }

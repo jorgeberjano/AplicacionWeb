@@ -13,7 +13,7 @@ import utiles.tiempo.Fecha;
 import utiles.tiempo.FechaHora;
 
 /**
- *
+ * Formateador para bases de datos Derby
  * @author jberjano
  */
 public class FormateadorDerby implements FormateadorSql {
@@ -25,7 +25,7 @@ public class FormateadorDerby implements FormateadorSql {
 
     @Override
     public String getFechaHoraSql(FechaHora fechaHora) {
-        return "DATE('" + fechaHora.formatear("yyyy-MM-dd-HH.mm.ss") + "')";
+        return "DATE('" + fechaHora.formatear("yyyy-MM-dd HH.mm.ss") + "')";
     }
     
     @Override

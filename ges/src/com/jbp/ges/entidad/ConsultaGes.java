@@ -89,7 +89,7 @@ public class ConsultaGes implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-        idConsulta = Conversion.quitarAcentos(nombre).replaceAll("\\s", "");
+        idConsulta = Conversion.quitarAcentos(nombre).replaceAll("\\s", "").toLowerCase();
     }
 
     public String getTabla() {

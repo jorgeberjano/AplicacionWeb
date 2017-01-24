@@ -42,6 +42,7 @@ public abstract class EjecutorSentenciaGuardado {
 
     public void setTabla(String tabla) {
         this.tabla = tabla;
+        limpiar();
     }
 
     protected void limpiar() {
