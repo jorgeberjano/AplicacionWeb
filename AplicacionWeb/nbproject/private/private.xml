@@ -16,22 +16,22 @@
             <file>file:/C:/personal/proyectos/AplicacionWeb/AplicacionWeb/src/java/com/jbp/aplicacionweb/controlador/ControladorCrud.java</file>
         </group>
         <group name="Turnos">
-            <file>file:/C:/personal/proyectos/AplicacionWeb/AplicacionWeb/src/java/com/jbp/aplicacionweb/controlador/ControladorCrud.java</file>
             <file>file:/C:/personal/proyectos/AplicacionWeb/AplicacionWeb/src/java/com/jbp/aplicacionweb/dto/DtoGenerico.java</file>
-            <file>file:/C:/personal/proyectos/AplicacionWeb/AplicacionWeb/src/java/com/jbp/aplicacionweb/Global.java</file>
-            <file>file:/C:/personal/proyectos/AplicacionWeb/AplicacionWeb/src/java/com/jbp/aplicacionweb/dto/DatosSesionTabla.java</file>
-            <file>file:/C:/personal/proyectos/AplicacionWeb/AplicacionWeb/web/resources/mensajes/mensajes_es.properties</file>
-            <file>file:/C:/personal/proyectos/AplicacionWeb/AplicacionWeb/src/java/config.properties</file>
-            <file>file:/C:/personal/proyectos/AplicacionWeb/AplicacionWeb/web/resources/js/crud.js</file>
-            <file>file:/C:/personal/proyectos/AplicacionWeb/AplicacionWeb/web/WEB-INF/jsp/crud/error.jsp</file>
-            <file>file:/C:/personal/proyectos/AplicacionWeb/AplicacionWeb/src/java/com/jbp/aplicacionweb/dao/RepositorioGes.java</file>
             <file>file:/C:/personal/proyectos/AplicacionWeb/AplicacionWeb/web/WEB-INF/jsp/crud/editor_formulario.jsp</file>
-            <file>file:/C:/personal/proyectos/AplicacionWeb/AplicacionWeb/web/WEB-INF/jsp/aplicacion.jsp</file>
-            <file>file:/C:/personal/proyectos/AplicacionWeb/AplicacionWeb/src/java/com/jbp/aplicacionweb/dto/ServicioPaginacionGenerico.java</file>
-            <file>file:/C:/personal/proyectos/AplicacionWeb/AplicacionWeb/web/WEB-INF/jsp/index.jsp</file>
-            <file>file:/C:/personal/proyectos/AplicacionWeb/AplicacionWeb/web/WEB-INF/jsp/contenido.jsp</file>
-            <file>file:/C:/personal/proyectos/AplicacionWeb/AplicacionWeb/web/WEB-INF/jsp/crud/tabla.jsp</file>
+            <file>file:/C:/personal/proyectos/AplicacionWeb/AplicacionWeb/src/java/config.properties</file>
+            <file>file:/C:/personal/proyectos/AplicacionWeb/AplicacionWeb/web/resources/mensajes/mensajes_es.properties</file>
+            <file>file:/C:/personal/proyectos/AplicacionWeb/AplicacionWeb/web/resources/js/crud.js</file>
+            <file>file:/C:/personal/proyectos/AplicacionWeb/AplicacionWeb/src/java/com/jbp/aplicacionweb/dao/RepositorioGes.java</file>
             <file>file:/C:/personal/proyectos/AplicacionWeb/AplicacionWeb/web/WEB-INF/jsp/crud/editor.jsp</file>
+            <file>file:/C:/personal/proyectos/AplicacionWeb/AplicacionWeb/web/WEB-INF/jsp/contenido.jsp</file>
+            <file>file:/C:/personal/proyectos/AplicacionWeb/AplicacionWeb/web/WEB-INF/jsp/crud/error.jsp</file>
+            <file>file:/C:/personal/proyectos/AplicacionWeb/AplicacionWeb/web/WEB-INF/jsp/index.jsp</file>
+            <file>file:/C:/personal/proyectos/AplicacionWeb/AplicacionWeb/src/java/com/jbp/aplicacionweb/controlador/ControladorCrud.java</file>
+            <file>file:/C:/personal/proyectos/AplicacionWeb/AplicacionWeb/src/java/com/jbp/aplicacionweb/dto/DatosSesionTabla.java</file>
+            <file>file:/C:/personal/proyectos/AplicacionWeb/AplicacionWeb/src/java/com/jbp/aplicacionweb/Global.java</file>
+            <file>file:/C:/personal/proyectos/AplicacionWeb/AplicacionWeb/src/java/com/jbp/aplicacionweb/controlador/ControladorAplicacion.java</file>
+            <file>file:/C:/personal/proyectos/AplicacionWeb/AplicacionWeb/web/WEB-INF/jsp/crud/tabla.jsp</file>
+            <file>file:/C:/personal/proyectos/AplicacionWeb/AplicacionWeb/src/java/com/jbp/aplicacionweb/dto/ServicioPaginacionGenerico.java</file>
         </group>
     </open-files>
 </project-private>
